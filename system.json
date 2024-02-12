@@ -1,18 +1,20 @@
 {
   "id": "trued6",
-  "title": "Trued6",
-  "description": "The Trued6 system for FoundryVTT!",
+  "title": "TRUE-d6",
+  "description": "The TRUE-d6 system for FoundryVTT!",
   "authors": [
     {
-      "name": "Asacolips",
-      "discord": "asacolips"
+      "name": "Cussa Mitre",
+      "url": "https://github.com/Cussa",
+      "discord": "CussaMitre",
+      "flags": {}
     }
   ],
-  "url": "Replace this with a link to your public repository",
-  "license": "LICENSE.txt",
+  "url": "https://github.com/Cussa/fvtt-true-d6",
+  "license": "LICENSE",
   "readme": "README.md",
-  "bugs": "Replace this with a link to file issues or tickets",
-  "changelog": "CHANGELOG.md",
+  "bugs": "https://github.com/Cussa/fvtt-true-d6/issues",
+  "changelog": "https://github.com/Cussa/fvtt-true-d6/releases",
   "media": [
     {
       "type": "setup",
@@ -20,7 +22,7 @@
       "thumbnail": "systems/trued6/assets/anvil-impact.png"
     }
   ],
-  "version": "1.3.0",
+  "version": "0.0.1",
   "compatibility": {
     "minimum": 11,
     "verified": "11.315"
@@ -37,11 +39,11 @@
   "packs": [],
   "packFolders": [],
   "socket": false,
-  "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
-  "download": "This must link to a .zip file of the current version",
+  "manifest": "https://github.com/cussa/fvtt-true-d6/releases/download/latest/module.json",
+  "download": "https://github.com/cussa/fvtt-true-d6/releases/download/latest/module.zip",
   "background": "systems/trued6/assets/anvil-impact.png",
-  "gridDistance": 5,
-  "gridUnits": "ft",
+  "gridDistance": 1,
+  "gridUnits": "m",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power"
 }
