@@ -203,7 +203,7 @@ button,
   text-align: right;
 }
 
-.align-center {
+.align-center, .trued6 .dice-roll .dice-tooltip {
   justify-content: center;
   text-align: center;
 }
@@ -308,6 +308,18 @@ button,
 }
 .trued6 .separator-line:last-child, .trued6 .dice-roll .dice-tooltip:last-child, .trued6 .dice-roll .dice-flavor:last-child {
   border: 0;
+}
+.trued6 .big0-75, .trued6 .dice-roll .dice-total label {
+  font-size: 0.75em;
+}
+.trued6 .big1 {
+  font-size: 1em;
+}
+.trued6 .big2, .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor {
+  font-size: 2em;
+}
+.trued6 .big3, .trued6 .border .label.big {
+  font-size: 3em;
 }
 .trued6 .resource-label {
   font-weight: bold;
@@ -429,12 +441,6 @@ button,
 }
 .trued6 .actor {
   min-width: 600px;
-}
-.trued6 .big2, .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor {
-  font-size: 2em;
-}
-.trued6 .big3, .trued6 .border .label.big {
-  font-size: 3em;
 }
 .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor {
   color: #191813;

@@ -24,6 +24,7 @@
 
   .dice-tooltip {
     @extend .separator-line;
+    @extend .align-center;
     padding: 5px;
 
     .part-total {
@@ -42,6 +43,10 @@
 
     &.success {
       color: $c-success;
+    }
+
+    label {
+      @extend .big0-75;
     }
   }
 }

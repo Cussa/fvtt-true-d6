@@ -16,11 +16,28 @@ export class Trued6Roll {
   }
 
   static getRollResult(actor, data, roll) {
-    if (actor.type == "npc")
-      return game.i18n.localize(roll.total > 0 ? "TRUED6.DiceRoll.Success" : "TRUED6.DiceRoll.Failure");
+    let result = {
+      textKey: "TRUED6.DiceRoll.Failure",
+      cssClass: "failure",
+      damage: null
+    };
 
-    //TODO: check if the roll is equal to the target
-    return game.i18n.localize(roll.total > 0 ? "TRUED6.DiceRoll.Success" : "TRUED6.DiceRoll.Failure");
+    if (roll.total == 0)
+      return result;
+
+    result.textKey = "TRUED6.DiceRoll.Success";
+    result.cssClass = "success";
+    result.damage = roll.terms[0].results[0].result;
+
+    if (actor.type == "npc")
+      return result;
+
+    if (result.damage == data.target) {
+      result.damage++;
+      result.textKey = "TRUED6.DiceRoll.CriticalSuccess";
+    }
+
+    return result;
   }
 
   static getRollFlavor(data) {
@@ -36,7 +53,6 @@ export class Trued6Roll {
   }
 
   static rollNpc(actor, data, rollMode) {
-    console.log("NPC Roll", actor, data, rollMode);
     const rollFormula = `1d6cs<=@${data.attackName.toLowerCase()}.value`;
 
     let attackRoll = this.createRoll(actor, rollFormula);
@@ -50,8 +66,6 @@ export class Trued6Roll {
   static createRoll(actor, rollFormula) {
     let attackRoll = new Roll(rollFormula, actor.getRollData());
     attackRoll.evaluate({ async: false });
-
-    console.log(attackRoll);
     return attackRoll;
   }
 
@@ -66,20 +80,22 @@ export class Trued6Roll {
     };
     let rollMode = game.settings.get("core", "rollMode");
     let isPrivate = false;
+    const rollResult = this.getRollResult(actor, data, roll);
 
     if (["gmroll", "blindroll"].includes(rollMode)) {
       chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
       isPrivate = true;
     }
     const templateData = {
-      formula: isPrivate ? "???" : roll._formula,
-      flavor: isPrivate ? null : this.getRollFlavor(data),
+      flavor: isPrivate ? "???" : this.getRollFlavor(data),
       user: chatData.user,
       tooltip: isPrivate ? "" : await roll.getTooltip({ async: false }),
       total: isPrivate ? "?" : Math.round(roll.total * 100) / 100,
-      rollResult: isPrivate ? "?" : this.getRollResult(actor, data, roll),
-      cssClass: roll.total > 0 ? "success" : "failure"
+      rollResult: isPrivate ? "?" : rollResult.textKey,
+      cssClass: isPrivate ? null : rollResult.cssClass,
+      damage: isPrivate ? null : rollResult.damage
     };
+    console.log(roll);
     renderTemplate(this.RollTemplate, templateData).then(content => {
       chatData.content = content;
       if (game.dice3d) {

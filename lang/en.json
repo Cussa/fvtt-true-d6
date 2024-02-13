@@ -62,7 +62,8 @@
       "Attack": "Attack",
       "Success": "Success",
       "CriticalSuccess": "Critical Success",
-      "Failure": "Failure"
+      "Failure": "Failure",
+      "Damage": "Damage"
     }
   },
   "TYPES": {

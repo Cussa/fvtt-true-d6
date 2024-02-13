@@ -6,7 +6,11 @@
     <div class="dice-result">
       {{{tooltip}}}
       <h4 class="dice-total {{cssClass}}">
-        {{rollResult}}
+        {{localize rollResult}}
+        {{#if damage}}
+        <br>
+        <label>{{localize "TRUED6.DiceRoll.Damage"}}: {{damage}}</label>
+        {{/if}}
       </h4>
     </div>
   </div>
