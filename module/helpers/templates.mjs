@@ -10,6 +10,9 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/trued6/templates/actor/parts/actor-items.hbs',
     'systems/trued6/templates/actor/parts/actor-spells.hbs',
     'systems/trued6/templates/actor/parts/actor-effects.hbs',
+    // NPC partials
+    'systems/trued6/templates/actor/npc-parts/attacks.hbs',
+    'systems/trued6/templates/actor/npc-parts/features.hbs',
     // Item partials
     'systems/trued6/templates/item/parts/item-effects.hbs',
   ]);

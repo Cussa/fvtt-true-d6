@@ -1,12 +1,30 @@
 {
   "TRUED6": {
     "Ability": {
-      "Str": { "long": "Strength", "abbr": "str" },
-      "Con": { "long": "Constitution", "abbr": "con" },
-      "Dex": { "long": "Dexterity", "abbr": "dex" },
-      "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Wisdom", "abbr": "wis" },
-      "Cha": { "long": "Charisma", "abbr": "cha" }
+      "Str": {
+        "long": "Strength",
+        "abbr": "str"
+      },
+      "Con": {
+        "long": "Constitution",
+        "abbr": "con"
+      },
+      "Dex": {
+        "long": "Dexterity",
+        "abbr": "dex"
+      },
+      "Int": {
+        "long": "Intelligence",
+        "abbr": "int"
+      },
+      "Wis": {
+        "long": "Wisdom",
+        "abbr": "wis"
+      },
+      "Cha": {
+        "long": "Charisma",
+        "abbr": "cha"
+      }
     },
     "SheetLabels": {
       "Actor": "Trued6 Actor Sheet",
@@ -24,9 +42,23 @@
       "Temporary": "Temporary Effects",
       "Passive": "Passive Effects",
       "Inactive": "Inactive Effects"
-    }
+    },
+    "HP": {
+      "MaxHP": "Max HP",
+      "CurrentHP": "Current HP",
+      "HPFormula": "HP Formula"
+    },
+    "Main": "Main",
+    "Attacks": {
+      "Melee": "Melee",
+      "Ranged": "Ranged",
+      "Number": "Number",
+      "Target": "Target",
+      "Special": "Special"
+    },
+    "ExtraAttacks": "Extra Attacks",
+    "Features": "Features"
   },
-
   "TYPES": {
     "Actor": {
       "character": "Character",
@@ -35,7 +67,8 @@
     "Item": {
       "item": "Item",
       "feature": "Feature",
-      "spell": "Spell"
+      "spell": "Spell",
+      "extraAttack": "Extra Attack"
     }
   }
 }

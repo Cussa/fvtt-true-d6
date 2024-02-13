@@ -96,6 +96,7 @@ export class Trued6ActorSheet extends ActorSheet {
     // Initialize containers.
     const gear = [];
     const features = [];
+    const extraAttacks = [];
     const spells = {
       0: [],
       1: [],
@@ -126,11 +127,15 @@ export class Trued6ActorSheet extends ActorSheet {
           spells[i.system.spellLevel].push(i);
         }
       }
+      else if (i.type === 'extraAttack') {
+        extraAttacks.push(i);
+      }
     }
 
     // Assign and return
     context.gear = gear;
     context.features = features;
+    context.extraAttacks = extraAttacks;
     context.spells = spells;
   }
 

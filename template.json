@@ -4,16 +4,10 @@
     "templates": {
       "base": {
         "health": {
-          "value": 10,
-          "min": 0,
-          "max": 10
-        },
-        "power": {
-          "value": 5,
-          "min": 0,
-          "max": 5
-        },
-        "biography": ""
+          "current": 2,
+          "max": 2,
+          "formula": ""
+        }
       }
     },
     "character": {
@@ -46,11 +40,21 @@
     },
     "npc": {
       "templates": ["base"],
-      "cr": 0
+      "melee": {
+        "number": 1,
+        "value": 3,
+        "special": ""
+      },
+      "ranged": {
+        "number": 0,
+        "value": 0,
+        "special": ""
+      },
+      "description": ""
     }
   },
   "Item": {
-    "types": ["item", "feature", "spell"],
+    "types": ["item", "feature", "spell", "extraAttack"],
     "templates": {
       "base": {
         "description": ""
@@ -63,6 +67,9 @@
       "formula": "d20 + @str.mod + ceil(@lvl / 2)"
     },
     "feature": {
+      "templates": ["base"]
+    },
+    "extraAttack": {
       "templates": ["base"]
     },
     "spell": {

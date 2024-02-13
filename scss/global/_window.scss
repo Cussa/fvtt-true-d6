@@ -1,8 +1,12 @@
-.window-app {
-  font-family: $font-primary;
+body,
+button,
+#tooltip {
+  font-family: $font-headers;
+  font-size: $font-normal-size;
 }
 
 .rollable {
+
   &:hover,
   &:focus {
     color: #000;

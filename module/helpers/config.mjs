@@ -4,6 +4,8 @@ export const TRUED6 = {};
  * The set of Ability Scores used within the system.
  * @type {Object}
  */
+TRUED6.debug = true;
+
 TRUED6.abilities = {
   str: 'TRUED6.Ability.Str.long',
   dex: 'TRUED6.Ability.Dex.long',

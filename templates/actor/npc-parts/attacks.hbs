@@ -1,0 +1,23 @@
+<div class="border">
+  <div class="label grid-span-2 top-left top-right separator-line big rollable">
+    <span>{{ header }}</span>
+  </div>
+  <div class="label">
+    <span>{{localize "TRUED6.Attacks.Number"}}</span>
+  </div>
+  <div class="input">
+    <input name="system.{{type}}.number" type="text" value="{{attack.number}}" placeholder="1" />
+  </div>
+  <div class="label">
+    <span>{{localize "TRUED6.Attacks.Target"}}</span>
+  </div>
+  <div class="input">
+    <input name="system.{{type}}.value" type="text" value="{{attack.value}}" placeholder="3" />
+  </div>
+  <div class="label bottom-left">
+    <span>{{localize "TRUED6.Attacks.Special"}}</span>
+  </div>
+  <div class="input">
+    <input name="system.{{type}}.special" type="text" value="{{attack.special}}" placeholder="" data-tooltip="{{attack.special}}" />
+  </div>
+</div>
