@@ -218,6 +218,9 @@ button,
 .trued6 .item-form {
   font-family: "Roboto", sans-serif;
 }
+.trued6 form.npc {
+  min-width: 580px;
+}
 .trued6 .sheet-header {
   grid-area: header;
   grid-column: 1/1;
