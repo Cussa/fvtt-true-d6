@@ -473,4 +473,13 @@ button,
 }
 .trued6 .dice-roll .dice-total.success {
   color: green;
+}
+.trued6 .dice-roll .dice-total label.failure {
+  color: red;
+}
+.trued6 .dice-roll .dice-total label.success {
+  color: green;
+}
+.trued6 .chat-reroll {
+  margin-top: 10px;
 }/*# sourceMappingURL=trued6.css.map */

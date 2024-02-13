@@ -63,7 +63,10 @@
       "Success": "Success",
       "CriticalSuccess": "Critical Success",
       "Failure": "Failure",
-      "Damage": "Damage"
+      "Damage": "Damage",
+      "Reroll": "Reroll",
+      "DiscardedByAdvantage": "Discarded by Advantage",
+      "DiscardedByDisadvantage": "Discarded by Disadvantage"
     }
   },
   "TYPES": {

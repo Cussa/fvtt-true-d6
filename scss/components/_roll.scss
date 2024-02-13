@@ -47,6 +47,18 @@
 
     label {
       @extend .big0-75;
+
+      &.failure {
+        color: $c-failure;
+      }
+
+      &.success {
+        color: $c-success;
+      }
     }
   }
+}
+
+.chat-reroll{
+  margin-top: 10px;
 }

@@ -1,26 +1,30 @@
 export class Trued6Roll {
   static RollTemplate = "systems/trued6/templates/roll/chat.hbs";
-  static RollModes = {
+  static RollTypes = {
     Normal: 0,
     Advantage: 1,
     Disadvantage: 2
   };
 
-  static getRollMode(event) {
+  static getRollType(event) {
     if (event.altKey)
-      return this.RollModes.Disadvantage;
+      return this.RollTypes.Disadvantage;
     if (event.shiftKey)
-      return this.RollModes.Advantage;
+      return this.RollTypes.Advantage;
 
-    return this.RollModes.Normal;
+    return this.RollTypes.Normal;
   }
 
-  static getRollResult(actor, data, roll) {
+  static getRollResult(actor, data, roll, rollType) {
     let result = {
       textKey: "TRUED6.DiceRoll.Failure",
       cssClass: "failure",
-      damage: null
+      damage: null,
+      rollType: 0
     };
+
+    if (rollType == this.RollTypes.Advantage)
+      result.rollType = this.RollTypes.Advantage;
 
     if (roll.total == 0)
       return result;
@@ -28,6 +32,9 @@ export class Trued6Roll {
     result.textKey = "TRUED6.DiceRoll.Success";
     result.cssClass = "success";
     result.damage = roll.terms[0].results[0].result;
+
+    if (rollType == this.RollTypes.Disadvantage)
+      result.rollType = this.RollTypes.Disadvantage;
 
     if (actor.type == "npc")
       return result;
@@ -41,35 +48,49 @@ export class Trued6Roll {
   }
 
   static getRollFlavor(data) {
-    if (data.rollType == "creatureAttack")
-      return `${game.i18n.localize("TRUED6.DiceRoll.Attack")}: ${data.attackName}`;
+    if (data.rollType == "attack")
+      return `${game.i18n.localize("TRUED6.DiceRoll.Attack")}: ${data.name}`;
+  }
+
+  static rollFromChat(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+    
+    const actor = game.actors.get(dataset.actorId);
+
+    const messageDiv = $(element).closest(".chat-message.message");
+    const message = game.messages.get(messageDiv.data("messageId"));
+    let newContent = $(message.content);
+    newContent.find(".advantage").css("display", "block");
+    newContent.find(".chat-reroll").remove();
+
+    message.update({ content: newContent[0].outerHTML});
+
+    this.roll(actor, dataset, event);
   }
 
   static roll(actor, data, event) {
-    const rollMode = this.getRollMode(event);
-    if (actor.type == "npc")
-      return this.rollNpc(actor, data, rollMode);
-    return rollPC(actor, data, rollMode);
+    const rollType = this.getRollType(event);
+    const rollFormula = `1d6cs<=${data.target}`;
+    console.log(rollType);
+
+    let attackRoll = this.createRoll(rollFormula);
+    this.sendRollToChat(attackRoll, actor, data, rollType);
+
+    if (rollType == this.RollTypes.Disadvantage && attackRoll.total > 0) {
+      attackRoll = this.createRoll(rollFormula);
+      this.sendRollToChat(attackRoll, actor, data, this.RollTypes.Normal);
+    }
   }
 
-  static rollNpc(actor, data, rollMode) {
-    const rollFormula = `1d6cs<=@${data.attackName.toLowerCase()}.value`;
-
-    let attackRoll = this.createRoll(actor, rollFormula);
-    this.sendRollToChat(attackRoll, actor, data);
-  }
-
-  rollPC(actor, data, rollMode) {
-
-  }
-
-  static createRoll(actor, rollFormula) {
-    let attackRoll = new Roll(rollFormula, actor.getRollData());
+  static createRoll(rollFormula) {
+    let attackRoll = new Roll(rollFormula);
     attackRoll.evaluate({ async: false });
     return attackRoll;
   }
 
-  static async sendRollToChat(roll, actor, data) {
+  static async sendRollToChat(roll, actor, data, rollType) {
     let chatData = {
       user: game.user.id,
       speaker: {
@@ -80,7 +101,7 @@ export class Trued6Roll {
     };
     let rollMode = game.settings.get("core", "rollMode");
     let isPrivate = false;
-    const rollResult = this.getRollResult(actor, data, roll);
+    const rollResult = this.getRollResult(actor, data, roll, rollType);
 
     if (["gmroll", "blindroll"].includes(rollMode)) {
       chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
@@ -93,9 +114,12 @@ export class Trued6Roll {
       total: isPrivate ? "?" : Math.round(roll.total * 100) / 100,
       rollResult: isPrivate ? "?" : rollResult.textKey,
       cssClass: isPrivate ? null : rollResult.cssClass,
-      damage: isPrivate ? null : rollResult.damage
+      damage: isPrivate ? null : rollResult.damage,
+      rollType: isPrivate ? null : rollResult.rollType,
+      rollTypeText: isPrivate ? null : rollResult.rollTypeText,
+      data: data,
+      actorId: actor.id
     };
-    console.log(roll);
     renderTemplate(this.RollTemplate, templateData).then(content => {
       chatData.content = content;
       if (game.dice3d) {

@@ -7,6 +7,7 @@ import { Trued6ItemSheet } from './sheets/item-sheet.mjs';
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { TRUED6 } from './helpers/config.mjs';
+import { Trued6Roll } from './rolls/roll.mjs';
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -77,6 +78,10 @@ Hooks.once('ready', function () {
 
   if (CONFIG.TRUED6.debug)
     game.actors.contents[0].sheet.render(true);
+});
+
+Hooks.on('renderChatLog', (app, html, _data) => {
+  html.on('click', '.chat-reroll', (event) =>  Trued6Roll.rollFromChat(event));
 });
 
 /* -------------------------------------------- */
