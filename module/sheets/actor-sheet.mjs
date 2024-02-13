@@ -140,8 +140,10 @@ export class Trued6ActorSheet extends ActorSheet {
     context.extraAttacks = extraAttacks;
     context.spells = spells;
 
-    context.system.melee.cssClass = context.system.melee.value > 0 ? "rollable" : "";
-    context.system.ranged.cssClass = context.system.ranged.value > 0 ? "rollable" : "";
+    if (this.actor.type == "npc") {
+      context.system.melee.cssClass = context.system.melee.value > 0 ? "rollable" : "";
+      context.system.ranged.cssClass = context.system.ranged.value > 0 ? "rollable" : "";
+    }
   }
 
   /* -------------------------------------------- */
