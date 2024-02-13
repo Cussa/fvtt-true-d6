@@ -237,7 +237,7 @@ button,
 }
 .trued6 .border {
   display: grid;
-  border: 2px solid black;
+  border: 2px solid #000;
   border-radius: 10px;
 }
 .trued6 .border > * {
@@ -245,7 +245,7 @@ button,
 }
 .trued6 .border .label {
   display: grid;
-  color: rgb(22, 22, 22);
+  color: #191813;
   font-weight: bold;
   text-align: center;
   flex: 1;
@@ -302,11 +302,11 @@ button,
 .trued6 .tox .tox-edit-area {
   padding: 0 8px;
 }
-.trued6 .separator-line {
-  border-bottom: 2px solid #111;
+.trued6 .separator-line, .trued6 .dice-roll .dice-tooltip, .trued6 .dice-roll .dice-flavor {
+  border-bottom: 2px solid #000;
   width: 100%;
 }
-.trued6 .separator-line:last-child {
+.trued6 .separator-line:last-child, .trued6 .dice-roll .dice-tooltip:last-child, .trued6 .dice-roll .dice-flavor:last-child {
   border: 0;
 }
 .trued6 .resource-label {
@@ -430,9 +430,41 @@ button,
 .trued6 .actor {
   min-width: 600px;
 }
-.trued6 .big2 {
+.trued6 .big2, .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor {
   font-size: 2em;
 }
 .trued6 .big3, .trued6 .border .label.big {
   font-size: 3em;
+}
+.trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor {
+  color: #191813;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+  background: #c0c0c0;
+  border-radius: 0;
+}
+.trued6 .dice-roll {
+  border: 2px solid #000;
+  border-radius: 10px;
+}
+.trued6 .dice-roll .dice-flavor {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.trued6 .dice-roll .dice-tooltip {
+  padding: 5px;
+}
+.trued6 .dice-roll .dice-tooltip .part-total {
+  display: none;
+}
+.trued6 .dice-roll .dice-total {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.trued6 .dice-roll .dice-total.failure {
+  color: red;
+}
+.trued6 .dice-roll .dice-total.success {
+  color: green;
 }/*# sourceMappingURL=trued6.css.map */

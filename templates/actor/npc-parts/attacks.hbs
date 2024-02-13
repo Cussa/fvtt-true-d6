@@ -1,23 +1,24 @@
 <div class="border">
-  <div class="label grid-span-2 top-left top-right separator-line big rollable">
+  {{log attack}}
+  <div class="label grid-span-2 top-left top-right separator-line big {{attack.cssClass}}" data-roll-type="creatureAttack" data-target="{{attack.value}}" data-special="{{attack.special}}" data-attack-name="{{header}}" >
     <span>{{ header }}</span>
   </div>
   <div class="label">
     <span>{{localize "TRUED6.Attacks.Number"}}</span>
   </div>
   <div class="input">
-    <input name="system.{{type}}.number" type="text" value="{{attack.number}}" placeholder="1" />
+    <input name="system.{{type}}.number" type="text" value="{{attack.number}}" />
   </div>
   <div class="label">
     <span>{{localize "TRUED6.Attacks.Target"}}</span>
   </div>
   <div class="input">
-    <input name="system.{{type}}.value" type="text" value="{{attack.value}}" placeholder="3" />
+    <input name="system.{{type}}.value" type="text" value="{{attack.value}}" />
   </div>
   <div class="label bottom-left">
     <span>{{localize "TRUED6.Attacks.Special"}}</span>
   </div>
   <div class="input">
-    <input name="system.{{type}}.special" type="text" value="{{attack.special}}" placeholder="" data-tooltip="{{attack.special}}" />
+    <input name="system.{{type}}.special" type="text" value="{{attack.special}}" data-tooltip="{{attack.special}}" />
   </div>
 </div>

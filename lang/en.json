@@ -57,7 +57,13 @@
       "Special": "Special"
     },
     "ExtraAttacks": "Extra Attacks",
-    "Features": "Features"
+    "Features": "Features",
+    "DiceRoll": {
+      "Attack": "Attack",
+      "Success": "Success",
+      "CriticalSuccess": "Critical Success",
+      "Failure": "Failure"
+    }
   },
   "TYPES": {
     "Actor": {

@@ -2,6 +2,7 @@ import {
   onManageActiveEffect,
   prepareActiveEffectCategories,
 } from '../helpers/effects.mjs';
+import { Trued6Roll } from '../rolls/roll.mjs';
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -68,6 +69,7 @@ export class Trued6ActorSheet extends ActorSheet {
       this.actor.allApplicableEffects()
     );
 
+    console.log(context);
     return context;
   }
 
@@ -137,6 +139,9 @@ export class Trued6ActorSheet extends ActorSheet {
     context.features = features;
     context.extraAttacks = extraAttacks;
     context.spells = spells;
+
+    context.system.melee.cssClass = context.system.melee.value > 0 ? "rollable" : "";
+    context.system.ranged.cssClass = context.system.ranged.value > 0 ? "rollable" : "";
   }
 
   /* -------------------------------------------- */
@@ -227,6 +232,9 @@ export class Trued6ActorSheet extends ActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
+    const actor = this.actor;
+
+    return Trued6Roll.roll(actor, dataset, event);
 
     // Handle item rolls.
     if (dataset.rollType) {
