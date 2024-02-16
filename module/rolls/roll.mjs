@@ -20,11 +20,16 @@ export class Trued6Roll {
       return this.RollStyles.Disadvantage;
     if (event.shiftKey)
       return this.RollStyles.Advantage;
-    if (rollData.forceDisadvantage && data.test && rollData.forceDisadvantage[data.test?.toLowerCase()])
-      return this.RollStyles.Disadvantage;
-    if (rollData.forceAdvantage && data.test && rollData.forceAdvantage[data.test?.toLowerCase()])
-      return this.RollStyles.Disadvantage;
-
+    if (rollData.forceDisadvantage) {
+      if ((data.attribute && rollData.forceDisadvantage[data.attribute?.toLowerCase()])
+        || data.rollData.forceDisadvantage[data.rollType.toLowerCase()])
+        return this.RollStyles.Disadvantage;
+    }
+    if (rollData.forceAdvantage) {
+      if ((data.attribute && rollData.forceAdvantage[data.attribute?.toLowerCase()])
+        || data.rollData.forceAdvantage[data.rollType.toLowerCase()])
+        return this.RollStyles.Advantage;
+    }
     return this.RollStyles.Normal;
   }
 
@@ -87,40 +92,43 @@ export class Trued6Roll {
       result.damage = null;
       result.isAttack = false;
     }
+    else if (data.rollType == "skill")
+      text = game.i18n.localize("TRUED6.Skill.Skill");
+    else if (data.rollType == "spell") {
+      text = game.i18n.localize("TRUED6.Skill.Spell");
+      result.isAttack = data.isAttack;
+      result.damage = data.isAttack ? result.damage : null;
+    }
     result.flavor = `${text}<br>${data.label.toUpperCase()}`;
   }
 
   static rollFromChat(event) {
     event.preventDefault();
     const element = event.currentTarget;
-    const dataset = element.dataset;
-
-    const actor = game.actors.get(dataset.actorId);
 
     const messageDiv = $(element).closest(".chat-message.message");
     const message = game.messages.get(messageDiv.data("messageId"));
+    const actor = game.actors.get(message.speaker.actor);
+    const data = message.flags.trued6.data;
+
     let newContent = $(message.content);
     newContent.find(".advantage").css("display", "block");
     newContent.find(".chat-reroll").remove();
 
     message.update({ content: newContent[0].outerHTML });
 
-    this.roll(actor, dataset, event);
+    this.roll(actor, data, event);
   }
 
   static roll(actor, data, event) {
-    console.log(data);
     const actorRollData = actor.getRollData();
     const rollStyle = this.getRollStyle(event, data, actorRollData);
+    if (!data.target && data.attribute)
+      data.target = actorRollData[data.attribute.toLowerCase()].value;
     const rollFormula = `1d6cs<=${data.target}`;
 
-    let attackRoll = this.createRoll(rollFormula);
+    let attackRoll = this.createRoll(rollFormula, actorRollData);
     this.sendRollToChat(attackRoll, actor, data, rollStyle);
-
-    if (rollStyle == this.RollStyles.Disadvantage && attackRoll.total > 0) {
-      attackRoll = this.createRoll(rollFormula);
-      this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal);
-    }
   }
 
   static createRoll(rollFormula) {
@@ -129,7 +137,7 @@ export class Trued6Roll {
     return attackRoll;
   }
 
-  static async sendRollToChat(roll, actor, data, rollType) {
+  static async sendRollToChat(roll, actor, data, rollStyle) {
     let chatData = {
       user: game.user.id,
       speaker: {
@@ -140,7 +148,7 @@ export class Trued6Roll {
     };
     let rollMode = game.settings.get("core", "rollMode");
     let isPrivate = false;
-    let rollResult = this.getRollResult(actor, data, roll, rollType);
+    let rollResult = this.getRollResult(actor, data, roll, rollStyle);
 
     if (["gmroll", "blindroll"].includes(rollMode)) {
       chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
@@ -159,15 +167,27 @@ export class Trued6Roll {
       data: data,
       actorId: actor.id
     };
+    chatData = foundry.utils.mergeObject({
+      flags: { trued6: { data: data } }
+    }, chatData);
     renderTemplate(this.RollTemplate, templateData).then(content => {
       chatData.content = content;
+      chatData.rolls = [roll];
       if (game.dice3d) {
         game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind)
-          .then(_ => ChatMessage.create(chatData));
+          .then(_ => this.finalizeRoll(chatData, actor, roll, data, rollStyle));
       } else {
         chatData.sound = CONFIG.sounds.dice;
-        ChatMessage.create(chatData);
+        this.finalizeRoll(chatData, actor, roll, data, rollStyle);
       }
     });
+  }
+
+  static finalizeRoll(chatData, actor, roll, data, rollStyle) {
+    ChatMessage.create(chatData);
+    if (rollStyle == this.RollStyles.Disadvantage && roll.total > 0) {
+      const attackRoll = this.createRoll(roll.formula);
+      this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal);
+    }
   }
 }

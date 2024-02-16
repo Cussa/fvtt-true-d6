@@ -132,6 +132,7 @@ export class Trued6ActorSheet extends ActorSheet {
         if (i.system.type == "Weapon") {
           i.cssClass = "rollable";
           i.rollType = "";
+          i.attribute = i.system.attackType;
           if (i.system.attackType == "str") {
             i.target = context.actor.system.attributes.str.value;
             i.rollType = "Melee";
@@ -157,6 +158,9 @@ export class Trued6ActorSheet extends ActorSheet {
         equipments.push(i);
       }
       else if (i.type == "skill") {
+        if (i.system.attribute)
+          i.cssClass = "rollable";
+        i.rollType = i.system.isSpell ? "spell" : "skill";
         skills.push(i);
       }
     }

@@ -25,48 +25,46 @@
         <div>
           <div class="border">
             <div class="label top-left top-right big2" class="flexrow">
-              <label>{{localize "TRUED6.Equipment.Characteristics"}}</label>
+              <label>{{localize "TRUED6.Characteristics"}}</label>
             </div>
             <div class="flexrow align-center">
-              <label class="label big1-5">{{localize "TRUED6.Equipment.Type"}}</label>
+              <label class="label big1-5">{{localize "TRUED6.Skill.Attribute"}}</label>
               <div>
-                <select name="system.type">
-                  {{#select item.system.type}}
-                  <option value="Weapon">{{localize "TRUED6.Equipment.Weapon"}}</option>
-                  <option value="Armour">{{localize "TRUED6.Equipment.Armour"}}</option>
-                  <option value="Shield">{{localize "TRUED6.Equipment.Shield"}}</option>
+                <select name="system.attribute">
+                  {{#select item.system.attribute}}
+                  <option value="none">{{localize "TRUED6.Skill.UsageType.none"}}</option>
+                  <option value="str">{{localize "TRUED6.Attributes.Str.abbr"}}</option>
+                  <option value="dex">{{localize "TRUED6.Attributes.Dex.abbr"}}</option>
+                  <option value="con">{{localize "TRUED6.Attributes.Con.abbr"}}</option>
+                  <option value="int">{{localize "TRUED6.Attributes.Int.abbr"}}</option>
+                  <option value="wis">{{localize "TRUED6.Attributes.Wis.abbr"}}</option>
+                  <option value="cha">{{localize "TRUED6.Attributes.Cha.abbr"}}</option>
                   {{/select}}
                 </select>
               </div>
             </div>
             <div class="flexrow align-center">
-              <label class="label big1-5">{{localize "TRUED6.Equipment.AttackType"}}</label>
+              <label class="label big1-5">{{localize "TRUED6.Skill.UsageType.label"}}</label>
               <div>
-                <select name="system.attackType">
-                  {{#select item.system.attackType}}
-                  <option value="">{{localize "TRUED6.Equipment.None"}}</option>
-                  <option value="str">{{localize "TRUED6.Attributes.Str.long"}}</option>
-                  <option value="dex">{{localize "TRUED6.Attributes.Dex.long"}}</option>
+                <select name="system.usageType">
+                  {{#select item.system.usageType}}
+                  <option value="none">{{localize "TRUED6.Skill.UsageType.none"}}</option>
+                  <option value="rest">{{localize "TRUED6.Skill.UsageType.rest"}}</option>
+                  <option value="fail">{{localize "TRUED6.Skill.UsageType.fail"}}</option>
                   {{/select}}
                 </select>
               </div>
             </div>
             <div class="flexrow align-center">
-              <label class="label big1-5">{{localize "TRUED6.Equipment.DmgBonus"}}</label>
+              <label class="label big1-5 bottom-left">{{localize "TRUED6.Skill.Spell"}}</label>
               <div>
-                <input type="number" name="system.damageBonus" value="{{item.system.damageBonus}}" />
+                <input type="checkbox" name="system.isSpell" {{checked item.system.isSpell}}>
               </div>
             </div>
             <div class="flexrow align-center">
-              <label class="label big1-5">{{localize "TRUED6.Equipment.Defense"}}</label>
+              <label class="label big1-5 bottom-left">{{localize "TRUED6.DiceRoll.Attack"}}</label>
               <div>
-                <input type="number" name="system.defenseValue" value="{{item.system.defenseValue}}" />
-              </div>
-            </div>
-            <div class="flexrow align-center">
-              <label class="label big1-5 bottom-left">{{localize "TRUED6.Equipment.ForceDisadvantage"}}</label>
-              <div>
-                <input type="checkbox" name="system.forceDisadvantage" {{checked item.system.forceDisadvantage}}>
+                <input type="checkbox" name="system.isAttack" {{checked item.system.isAttack}}>
               </div>
             </div>
           </div>

@@ -1,5 +1,10 @@
 {
   "TRUED6": {
+    "Main": "Main",
+    "ExtraAttacks": "Extra Attacks",
+    "Features": "Features",
+    "none": "None",
+    "Characteristics": "Characteristics",
     "Attributes": {
       "Str": {
         "long": "Strength",
@@ -61,7 +66,6 @@
       "CurrentHP": "Current HP",
       "HPFormula": "HP Formula"
     },
-    "Main": "Main",
     "Attacks": {
       "Melee": "Melee",
       "Ranged": "Ranged",
@@ -71,8 +75,6 @@
       "Special": "Special",
       "":""
     },
-    "ExtraAttacks": "Extra Attacks",
-    "Features": "Features",
     "DiceRoll": {
       "Attack": "Attack",
       "Attribute": "Attribute",
@@ -92,20 +94,28 @@
       "Coins": "Coins"
     },
     "Equipment": {
-      "Characteristics": "Characteristics",
       "Type": "Type",
+      "None": "None",
       "Weapon": "Weapon",
       "Armour": "Armour",
       "Shield": "Shield",
       "AttackType": "Attack Type",
-      "None": "None",
       "DmgBonus": "Dmg Bonus",
       "Defense":"Defense",
       "ForceDisadvantage" :"Force Disadv.",
       "":""
     },
-    "Formula": {
-
+    "Skill": {
+      "Skill": "Skill",
+      "UsageType": {
+        "label": "Usage Type",
+        "none": "None",
+        "rest": "Once Per Rest",
+        "fail": "Until Fail"
+      },
+      "Attribute": "Attribute",
+      "Used": "Used",
+      "Spell": "Spell"
     }
   },
   "TYPES": {

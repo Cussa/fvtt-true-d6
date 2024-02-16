@@ -17,8 +17,7 @@
       <h4>{{item.name}}</h4>
     </div>
     <div class='item-controls'>
-      <a class='{{item.cssClass}}' data-roll-type='{{item.rollType}}' data-target="{{item.target}}"
-        data-label="{{item.label}}" data-dmg-bonus="{{item.system.damageBonus}}">
+      <a class='{{item.cssClass}}' data-roll-type='{{item.rollType}}' data-is-attack="{{item.system.isAttack}}" data-is-spell="{{item.system.isSpell}}" data-label="{{item.name}}" data-attribute="{{item.system.attribute}}">
         <i class='fas fa-dice'></i>
       </a>
       <a class='item-control item-edit'

@@ -82,11 +82,12 @@
     },
     "skill": {
       "templates": ["base"],
-      "rechargeType": "none",
+      "usageType": "none",
       "whenRestUsed": false,
       "whenFailedUsed": false,
       "isSpell": false,
-      "formula": ""
+      "isAttack": false,
+      "attribute": ""
     }
   }
 }
