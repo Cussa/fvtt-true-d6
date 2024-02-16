@@ -70,12 +70,16 @@ export class Trued6Roll {
     if (data.dmgBonus)
       result.damage += parseInt(data.dmgBonus);
 
+    this.removeDamageIfNecessary(result, data);
+
     return result;
   }
 
   static getRollFlavor(data, result) {
 
     let text = "";
+    result.isAttack = /^true$/i.test(data.isAttack);
+
     if (data.rollType == "Melee")
       text = `${game.i18n.localize("TRUED6.Attacks.Melee")} ${game.i18n.localize("TRUED6.DiceRoll.Attack")}`;
     else if (data.rollType == "Ranged")
@@ -92,14 +96,26 @@ export class Trued6Roll {
       result.damage = null;
       result.isAttack = false;
     }
-    else if (data.rollType == "skill")
+    else if (data.rollType == "skill") {
       text = game.i18n.localize("TRUED6.Skill.Skill");
+      this.changeDamageKeyIfIsAttack(result);
+    }
     else if (data.rollType == "spell") {
       text = game.i18n.localize("TRUED6.Skill.Spell");
-      result.isAttack = data.isAttack;
-      result.damage = data.isAttack ? result.damage : null;
+      this.changeDamageKeyIfIsAttack(result);
     }
     result.flavor = `${text}<br>${data.label.toUpperCase()}`;
+  }
+
+  static changeDamageKeyIfIsAttack(result){
+    if (!result.isAttack) {
+      result.damageKey = "TRUED6.Skill.RollResult";
+    }
+  }
+
+  static removeDamageIfNecessary(result, data) {
+    if (["attribute"].includes(data.rollType))
+      result.damage = null;
   }
 
   static rollFromChat(event) {

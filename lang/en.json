@@ -16,31 +16,31 @@
         "long": "Dexterity",
         "abbr": "dex",
         "explanation": "ranged attacks, acrobatics, coordination, handiness",
-        "order": "3"
+        "order": "2"
       },
       "Con": {
         "long": "Constitution",
         "abbr": "con",
         "explanation": "resistance, metabolism, endurance, stamina, health",
-        "order": "2"
+        "order": "3"
       },
       "Int": {
         "long": "Intelligence",
         "abbr": "int",
         "explanation": "arcane magic, logic, education, investigation, tracking",
-        "order": "5"
+        "order": "4"
       },
       "Wis": {
         "long": "Wisdom",
         "abbr": "wis",
         "explanation": "divine magic, religion, empathy, intuition, discernment",
-        "order": "6"
+        "order": "5"
       },
       "Cha": {
         "long": "Charisma",
         "abbr": "cha",
         "explanation": "ascendant, elocution, arts, passion, nerve, leadership",
-        "order": "4"
+        "order": "6"
       }
     },
     "SheetLabels": {
@@ -73,7 +73,7 @@
       "Number": "Number",
       "Target": "Target",
       "Special": "Special",
-      "":""
+      "": ""
     },
     "DiceRoll": {
       "Attack": "Attack",
@@ -101,9 +101,9 @@
       "Shield": "Shield",
       "AttackType": "Attack Type",
       "DmgBonus": "Dmg Bonus",
-      "Defense":"Defense",
-      "ForceDisadvantage" :"Force Disadv.",
-      "":""
+      "Defense": "Defense",
+      "ForceDisadvantage": "Force Disadv.",
+      "": ""
     },
     "Skill": {
       "Skill": "Skill",
@@ -115,7 +115,8 @@
       },
       "Attribute": "Attribute",
       "Used": "Used",
-      "Spell": "Spell"
+      "Spell": "Spell",
+      "RollResult": "Roll Result"
     }
   },
   "TYPES": {
