@@ -15,8 +15,8 @@ export class Trued6Roll {
 
   static getRollStyle(event, data, rollData) {
     let currentRollStyle = {
-      hasAdvantage:false,
-      hasDisadvantage:false,
+      hasAdvantage: false,
+      hasDisadvantage: false,
       value: 0
     };
     if (event.altKey ||
@@ -39,7 +39,7 @@ export class Trued6Roll {
     }
     currentRollStyle.value += currentRollStyle.hasAdvantage ? 1 : 0;
     currentRollStyle.value += currentRollStyle.hasDisadvantage ? -1 : 0;
-    
+
     return currentRollStyle.value;
   }
 
@@ -223,7 +223,9 @@ export class Trued6Roll {
       const attackRoll = await this.createRoll(roll.formula);
       finalRoll = await this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal, actorRollData);
     }
-    if (rollStyle == this.RollStyles.Normal && data.itemId) {
+    if (data.itemId &&
+      (rollStyle == this.RollStyles.Disadvantage && roll.total == 0) ||
+      rollStyle == this.RollStyles.Normal) {
       let item = actor.items.get(data.itemId);
       await item.updateUsage(roll);
     }
