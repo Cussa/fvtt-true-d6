@@ -24,12 +24,6 @@ button,
   margin: 10px 0;
   padding: 0;
 }
-.grid > *,
-.grid-2col > * {
-  display: grid;
-  align-items: center;
-  justify-items: center;
-}
 .grid.no-margin,
 .grid-2col.no-margin {
   margin: 0;
@@ -37,6 +31,9 @@ button,
 .grid.no-margin > *,
 .grid-2col.no-margin > * {
   padding: 10px 0;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 }
 .grid-3col {
   grid-column: span 3/span 3;

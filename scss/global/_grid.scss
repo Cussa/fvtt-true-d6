@@ -8,21 +8,18 @@
   margin: 10px 0;
   padding: 0;
 
-  >* {
-    display: grid;
-    align-items: center;
-    justify-items: center;
-  }
-
   &.no-margin {
     margin: 0;
 
     >* {
       padding: 10px 0;
+      display: grid;
+      align-items: center;
+      justify-items: center;
     }
   }
 
-  &.label:first-child{
+  &.label:first-child {
     @extend .top-left;
   }
 }
