@@ -112,18 +112,7 @@ export class Trued6ActorSheet extends ActorSheet {
     const features = [];
     const extraAttacks = [];
     const equipments = [];
-    const spells = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: [],
-    };
+    const skills = [];
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
@@ -135,12 +124,6 @@ export class Trued6ActorSheet extends ActorSheet {
       // Append to features.
       else if (i.type === 'feature') {
         features.push(i);
-      }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.system.spellLevel != undefined) {
-          spells[i.system.spellLevel].push(i);
-        }
       }
       else if (i.type === 'extraAttack') {
         extraAttacks.push(i);
@@ -173,14 +156,19 @@ export class Trued6ActorSheet extends ActorSheet {
         }
         equipments.push(i);
       }
+      else if (i.type == "skill") {
+        skills.push(i);
+      }
     }
 
     // Assign and return
-    context.gear = gear;
-    context.features = features;
-    context.extraAttacks = extraAttacks;
-    context.spells = spells;
-    context.equipments = equipments;
+    context.gear = gear.sort((a,b) => a.name.localeCompare(b.name));
+    context.features = features.sort((a,b) => a.name.localeCompare(b.name));
+    context.extraAttacks = extraAttacks.sort((a,b) => a.name.localeCompare(b.name));
+    context.equipments = equipments
+      .sort((a,b) => a.name.localeCompare(b.name))
+      .sort((a,b) => a.system.type.localeCompare(b.system.type));
+    context.skills = skills.sort((a,b) => a.name.localeCompare(b.name));
 
     if (this.actor.type == "npc") {
       context.system.melee.cssClass = context.system.melee.value > 0 ? "rollable" : "";

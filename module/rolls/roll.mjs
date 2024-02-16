@@ -11,11 +11,19 @@ export class Trued6Roll {
     Disadvantage: 2
   };
 
-  static getRollStyle(event) {
+  static getRollStyle(event, data, rollData) {
+    if (data.forceAdvantage)
+      return this.RollStyles.Advantage;
+    if (data.forceDisadvantage)
+      return this.RollStyles.Disadvantage;
     if (event.altKey)
       return this.RollStyles.Disadvantage;
     if (event.shiftKey)
       return this.RollStyles.Advantage;
+    if (rollData.forceDisadvantage && data.test && rollData.forceDisadvantage[data.test?.toLowerCase()])
+      return this.RollStyles.Disadvantage;
+    if (rollData.forceAdvantage && data.test && rollData.forceAdvantage[data.test?.toLowerCase()])
+      return this.RollStyles.Disadvantage;
 
     return this.RollStyles.Normal;
   }
@@ -101,12 +109,11 @@ export class Trued6Roll {
   }
 
   static roll(actor, data, event) {
+    console.log(data);
     const actorRollData = actor.getRollData();
-    console.log(actorRollData);
-    const rollStyle = this.getRollStyle(event);
+    const rollStyle = this.getRollStyle(event, data, actorRollData);
     const rollFormula = `1d6cs<=${data.target}`;
 
-    console.log(data);
     let attackRoll = this.createRoll(rollFormula);
     this.sendRollToChat(attackRoll, actor, data, rollStyle);
 

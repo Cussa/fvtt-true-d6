@@ -46,11 +46,11 @@ export class Trued6Actor extends Actor {
 
     const highestArmour = Math.max(...(actorData.items
       .filter(it => it.type == "equipment" && it.system.type == "Armour")
-      .map(o => o.system.defenseValue)));
+      .map(o => o.system.defenseValue)), 0);
     const highestShield = Math.max(...(actorData.items
       .filter(it => it.type == "equipment" && it.system.type == "Shield")
-      .map(o => o.system.defenseValue)));
-    actorData.system.defense = Math.max(highestArmour, highestShield);
+      .map(o => o.system.defenseValue)), 0);
+    actorData.system.defense = Math.max(highestArmour, highestShield, 0);
     actorData.system.hasArmour = highestArmour > 0;
     actorData.system.hasShield = highestShield > 0;
   }

@@ -103,6 +103,9 @@
       "Defense":"Defense",
       "ForceDisadvantage" :"Force Disadv.",
       "":""
+    },
+    "Formula": {
+
     }
   },
   "TYPES": {
@@ -115,7 +118,8 @@
       "feature": "Feature",
       "spell": "Spell",
       "extraAttack": "Extra Attack",
-      "equipment": "Equipment"
+      "equipment": "Equipment",
+      "skill": "Skill"
     }
   }
 }

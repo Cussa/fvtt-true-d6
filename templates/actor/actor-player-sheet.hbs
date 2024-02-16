@@ -69,10 +69,10 @@
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item" data-tab="attributes">Attributes</a>
-    <a class="item" data-tab="description">Description</a>
+    <a class="item" data-tab="skills">Skills</a>
     <a class="item" data-tab="equipments">Equipments</a>
     <a class="item" data-tab="items">Items</a>
-    <a class="item" data-tab="spells">Spells</a>
+    <a class="item" data-tab="description">{{localize "Description"}}</a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -86,7 +86,19 @@
     <div class="tab biography" data-group="primary" data-tab="description">
       {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to
       the rollData property. --}}
-      {{editor system.biography target="system.biography" rollData=rollData button=true owner=owner editable=editable}}
+      
+        <div class="description-border">
+          <label>{{localize "Description"}}</label>
+          <div class="box">
+            {{editor system.description target="system.description" rollData=rollData button=true owner=owner
+            editable=editable}}
+          </div>
+        </div>
+    </div>
+
+    {{!-- Owned Skills Tab --}}
+    <div class="tab items" data-group="primary" data-tab="skills">
+      {{> "systems/trued6/templates/actor/player-parts/skills.hbs"}}
     </div>
 
     {{!-- Owned Items Tab --}}

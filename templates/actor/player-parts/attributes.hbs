@@ -4,14 +4,14 @@
     <div class="grid grid-12col no-margin align-center">
       <div class="label grid-span-2 {{attribute.cssClass}}">
         <label class="resource-label rollable big1-5" data-label="{{attribute.label}}" data-roll-type="attribute"
-          data-target="{{attribute.value}}">{{attribute.abbr}}</label>
+          data-target="{{attribute.value}}" data-test="{{attribute.abbr}}">{{attribute.abbr}}</label>
       </div>
       <div>
         <input class="big1-5" type="number" name="system.attributes.{{attribute.key}}.value" value="{{attribute.value}}"
           data-dtype="Number" data-action-max-value="5" />
       </div>
       <label class="resource-label rollable align-left big1-5 grid-span-4" data-label="{{attribute.label}}"
-        data-roll-type="attribute" data-target="{{attribute.value}}">{{attribute.label}}</label>
+        data-roll-type="attribute" data-target="{{attribute.value}}" data-test="{{attribute.abbr}}">{{attribute.label}}</label>
         <div class="grid-span-5 align-right">
       <label style="margin-right: 5px;">{{attribute.explanation}}</label>
       </div>

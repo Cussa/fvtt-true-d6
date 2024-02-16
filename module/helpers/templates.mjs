@@ -13,6 +13,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/trued6/templates/actor/player-parts/attributes.hbs',
     'systems/trued6/templates/actor/player-parts/equipments.hbs',
     'systems/trued6/templates/actor/player-parts/items.hbs',
+    'systems/trued6/templates/actor/player-parts/skills.hbs',
     // NPC partials
     'systems/trued6/templates/actor/npc-parts/attacks.hbs',
     'systems/trued6/templates/actor/npc-parts/features.hbs',
