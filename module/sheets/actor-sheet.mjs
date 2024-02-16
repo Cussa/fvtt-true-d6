@@ -316,7 +316,8 @@ export class Trued6ActorSheet extends ActorSheet {
       close: () => { return false; }
     });
 
-    await this.actor.items.get(dialogOutput).refreshUsage();
+    if (dialogOutput)
+      await this.actor.items.get(dialogOutput).refreshUsage();
     ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
   }
 
