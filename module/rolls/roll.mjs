@@ -10,29 +10,37 @@ export class Trued6Roll {
   static RollStyles = {
     Normal: 0,
     Advantage: 1,
-    Disadvantage: 2
+    Disadvantage: -1
   };
 
   static getRollStyle(event, data, rollData) {
+    let currentRollStyle = {
+      hasAdvantage:false,
+      hasDisadvantage:false,
+      value: 0
+    };
     if (event.altKey ||
       isTrue(data.forceDisadvantage))
-      return this.RollStyles.Disadvantage;
+      currentRollStyle.hasDisadvantage = true;
 
     if (event.shiftKey ||
       isTrue(data.forceAdvantage))
-      return this.RollStyles.Advantage;
+      currentRollStyle.hasAdvantage = true;
 
     if (rollData.forceDisadvantage) {
       if ((data.attribute && rollData.forceDisadvantage[data.attribute?.toLowerCase()])
         || rollData.forceDisadvantage[data.rollType.toLowerCase()])
-        return this.RollStyles.Disadvantage;
+        currentRollStyle.hasDisadvantage = true;
     }
     if (rollData.forceAdvantage) {
       if ((data.attribute && rollData.forceAdvantage[data.attribute?.toLowerCase()])
         || rollData.forceAdvantage[data.rollType.toLowerCase()])
-        return this.RollStyles.Advantage;
+        currentRollStyle.hasAdvantage = true;
     }
-    return this.RollStyles.Normal;
+    currentRollStyle.value += currentRollStyle.hasAdvantage ? 1 : 0;
+    currentRollStyle.value += currentRollStyle.hasDisadvantage ? -1 : 0;
+    
+    return currentRollStyle.value;
   }
 
   static getRollResult(actor, data, roll, rollStyle, actorRollData) {
