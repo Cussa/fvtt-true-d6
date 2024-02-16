@@ -1,3 +1,5 @@
+import { isTrue } from "../helpers/extensions.mjs";
+
 export class Trued6Roll {
   static RollTemplate = "systems/trued6/templates/chat/roll.hbs";
 
@@ -12,22 +14,23 @@ export class Trued6Roll {
   };
 
   static getRollStyle(event, data, rollData) {
+    console.log(data, rollData);
     if (event.altKey ||
-      data.forceDisadvantage)
+      isTrue(data.forceDisadvantage))
       return this.RollStyles.Disadvantage;
 
     if (event.shiftKey ||
-      data.forceAdvantage)
+      isTrue(data.forceAdvantage))
       return this.RollStyles.Advantage;
 
     if (rollData.forceDisadvantage) {
       if ((data.attribute && rollData.forceDisadvantage[data.attribute?.toLowerCase()])
-        || rollData?.forceDisadvantage[data.rollType.toLowerCase()])
+        || rollData.forceDisadvantage[data.rollType.toLowerCase()])
         return this.RollStyles.Disadvantage;
     }
     if (rollData.forceAdvantage) {
       if ((data.attribute && rollData.forceAdvantage[data.attribute?.toLowerCase()])
-        || rollData?.forceAdvantage[data.rollType.toLowerCase()])
+        || rollData.forceAdvantage[data.rollType.toLowerCase()])
         return this.RollStyles.Advantage;
     }
     return this.RollStyles.Normal;

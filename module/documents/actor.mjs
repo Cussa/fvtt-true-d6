@@ -58,7 +58,7 @@ export class Trued6Actor extends Actor {
     };
 
     for (let i of actorData.items.filter(it => it.type == "equipment")) {
-      if (i.system.type == "Weapon")
+      if (i.system.type == "Weapon" || !i.system.equipped)
         continue;
       var currentValue = i.system.defenseValue;
       var currentName = i.name;

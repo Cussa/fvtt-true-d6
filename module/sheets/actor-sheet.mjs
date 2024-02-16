@@ -111,7 +111,16 @@ export class Trued6ActorSheet extends ActorSheet {
     const gear = [];
     const features = [];
     const extraAttacks = [];
-    const equipments = [];
+    const equipments = {
+      true: {
+        label: game.i18n.localize("TRUED6.Equipment.Equipped"),
+        items: []
+      },
+      false: {
+        label: game.i18n.localize("TRUED6.Equipment.Unequipped"),
+        items: []
+      }
+    };
     const skills = [];
 
     // Iterate through items, allocating to containers
@@ -129,6 +138,7 @@ export class Trued6ActorSheet extends ActorSheet {
         extraAttacks.push(i);
       }
       else if (i.type === 'equipment') {
+        i.equipClass = i.system.equipped ? "box-open" : "box";
         if (i.system.type == "Weapon") {
           i.rollable = true;
           i.rollType = "";
@@ -155,7 +165,7 @@ export class Trued6ActorSheet extends ActorSheet {
           i.label = i.name;
           i.target = i.system.defenseValue;
         }
-        equipments.push(i);
+        equipments[i.system.equipped].items.push(i);
       }
       else if (i.type == "skill") {
         i.isUsed = i.system.whenRestUsed || i.system.whenFailedUsed;
@@ -169,12 +179,16 @@ export class Trued6ActorSheet extends ActorSheet {
     }
 
     // Assign and return
+    equipments.true.items = equipments.true.items
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => a.system.type.localeCompare(b.system.type));
+    equipments.false.items = equipments.false.items
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => a.system.type.localeCompare(b.system.type));
+    context.equipments = [equipments.true, equipments.false];
     context.gear = gear.sort((a, b) => a.name.localeCompare(b.name));
     context.features = features.sort((a, b) => a.name.localeCompare(b.name));
     context.extraAttacks = extraAttacks.sort((a, b) => a.name.localeCompare(b.name));
-    context.equipments = equipments
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .sort((a, b) => a.system.type.localeCompare(b.system.type));
     context.skills = skills.sort((a, b) => a.name.localeCompare(b.name));
 
     if (this.actor.type == "npc") {
@@ -207,6 +221,7 @@ export class Trued6ActorSheet extends ActorSheet {
     html.on('click', '.usable', this._onItemUse.bind(this));
     html.on('click', '.refreshUse', this._onItemRefresh.bind(this));
     html.on('click', '.send-to-chat', this._onItemSendToChat.bind(this));
+    html.on('click', '.equip', this._onItemEquip.bind(this));
 
     // Delete Inventory Item
     html.on('click', '.item-delete', (ev) => {
@@ -341,22 +356,27 @@ export class Trued6ActorSheet extends ActorSheet {
     ui.notifications.info(game.i18n.localize("TRUED6.LongRest"));
   }
 
-  async _onItemUse(event){
+  async _onItemUse(event) {
     const item = this._getItem(event);
     await item.updateUsage(null);
   }
 
-  async _onItemRefresh(event){
+  async _onItemRefresh(event) {
     const item = this._getItem(event);
     await item.refreshUsage();
   }
 
-  async _onItemSendToChat(event){
+  async _onItemEquip(event) {
+    const item = this._getItem(event);
+    await item.equipUnequip();
+  }
+
+  async _onItemSendToChat(event) {
     const item = this._getItem(event);
     await item.sendToChat(this.actor);
   }
 
-  _getItem(event){
+  _getItem(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;

@@ -10,6 +10,15 @@ export class Trued6Item extends Item {
     // As with the actor class, items are documents that can have their data
     // preparation methods overridden (such as prepareBaseData()).
     super.prepareData();
+
+    if (this.type != "equipment")
+      return;
+
+    const equipped = this.system.equipped;
+    for (let effect of this.effects) {
+      effect.transfer = equipped;
+      effect.disabled = !equipped;
+    }
   }
 
   async updateUsage(roll) {
@@ -35,6 +44,11 @@ export class Trued6Item extends Item {
       "system.whenFailedUsed": false,
       "system.whenRestUsed": false
     });
+  }
+
+  async equipUnequip() {
+    const currentEquip = this.system.equipped;
+    await this.update({ "system.equipped": !currentEquip });
   }
 
   _getLabelGeneric(labels) {

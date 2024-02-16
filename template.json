@@ -78,7 +78,8 @@
       "attackType": "",
       "damageBonus": 0,
       "forceDisadvantage": false,
-      "defenseValue": 0
+      "defenseValue": 0,
+      "equipped": true
     },
     "skill": {
       "templates": ["base"],

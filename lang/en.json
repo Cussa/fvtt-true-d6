@@ -109,7 +109,9 @@
       "DmgBonus": "Dmg Bonus",
       "Defense": "Defense",
       "ForceDisadvantage": "Force Disadv.",
-      "": ""
+      "": "",
+      "Equipped": "Equipped Equipments",
+      "Unequipped": "Unequipped Equipments"
     },
     "Skill": {
       "Skill": "Skill",

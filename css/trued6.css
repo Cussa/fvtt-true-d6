@@ -507,6 +507,9 @@ button,
 .trued6 .actor {
   min-width: 600px;
 }
+.trued6 .player .equipments .item-controls {
+  flex: 0 0 125px;
+}
 .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor {
   color: #191813;
   font-weight: bold;
