@@ -229,6 +229,20 @@ button,
   /* ----------------------------------------- */
   /* Example style for Trued6 (can be removed if not needed) */
 }
+.trued6 .chat-item-description .description {
+  padding: 0px 5px;
+  text-align: justify;
+}
+.trued6 .chat-item-description .characteristics {
+  float: left;
+  display: flex;
+}
+.trued6 .chat-item-description .characteristics img {
+  width: 100px;
+}
+.trued6 .chat-item-description .characteristics span {
+  flex: 1;
+}
 .trued6 .item-form {
   font-family: "Roboto", sans-serif;
 }
@@ -257,15 +271,15 @@ button,
   flex: 0.25;
   margin-right: 5px;
 }
-.trued6 .border {
+.trued6 .border, .trued6 .chat-item-description {
   display: grid;
   border: 2px solid #000;
   border-radius: 10px;
 }
-.trued6 .border > * {
+.trued6 .border > *, .trued6 .chat-item-description > * {
   align-items: center;
 }
-.trued6 .border .label {
+.trued6 .border .label, .trued6 .chat-item-description .label {
   display: grid;
   color: #191813;
   font-weight: bold;
@@ -274,46 +288,47 @@ button,
   background: #c0c0c0;
   border-radius: 0;
 }
-.trued6 .border .label.top-left, .trued6 .border .label.grid:first-child,
-.trued6 .border .label.grid-2col:first-child {
+.trued6 .border .label.top-left, .trued6 .chat-item-description .label.top-left, .trued6 .border .label.grid:first-child, .trued6 .chat-item-description .label.grid:first-child,
+.trued6 .border .label.grid-2col:first-child,
+.trued6 .chat-item-description .label.grid-2col:first-child {
   border-top-left-radius: 10px;
 }
-.trued6 .border .label.top-right {
+.trued6 .border .label.top-right, .trued6 .chat-item-description .label.top-right {
   border-top-right-radius: 10px;
 }
-.trued6 .border .label.bottom-left {
+.trued6 .border .label.bottom-left, .trued6 .chat-item-description .label.bottom-left {
   border-bottom-left-radius: 10px;
 }
-.trued6 .border .label.bottom-right {
+.trued6 .border .label.bottom-right, .trued6 .chat-item-description .label.bottom-right {
   border-bottom-right-radius: 10px;
 }
-.trued6 .border .input, .trued6 .border .list-button, .trued6 .border .list-item {
+.trued6 .border .input, .trued6 .border .list-button, .trued6 .border .chat-item-description .list-button, .trued6 .chat-item-description .border .list-button, .trued6 .border .list-item, .trued6 .border .chat-item-description .list-item, .trued6 .chat-item-description .border .list-item, .trued6 .chat-item-description .input, .trued6 .chat-item-description .list-button, .trued6 .chat-item-description .list-item {
   display: grid;
   align-items: center;
   padding: 2px 10px;
 }
-.trued6 .border .input input, .trued6 .border .list-button input, .trued6 .border .list-item input {
+.trued6 .border .input input, .trued6 .border .list-button input, .trued6 .border .chat-item-description .list-button input, .trued6 .chat-item-description .border .list-button input, .trued6 .border .list-item input, .trued6 .border .chat-item-description .list-item input, .trued6 .chat-item-description .border .list-item input, .trued6 .chat-item-description .input input, .trued6 .chat-item-description .list-button input, .trued6 .chat-item-description .list-item input {
   border: 0;
   background: 0;
   height: auto;
 }
-.trued6 .border .input input.top, .trued6 .border .list-button input.top, .trued6 .border .list-item input.top {
+.trued6 .border .input input.top, .trued6 .border .list-button input.top, .trued6 .border .list-item input.top, .trued6 .chat-item-description .input input.top, .trued6 .chat-item-description .list-button input.top, .trued6 .chat-item-description .list-item input.top {
   font-size: 3em;
 }
-.trued6 .border .input.no-padding, .trued6 .border .no-padding.list-button, .trued6 .border .no-padding.list-item {
+.trued6 .border .input.no-padding, .trued6 .border .no-padding.list-button, .trued6 .border .no-padding.list-item, .trued6 .chat-item-description .input.no-padding, .trued6 .chat-item-description .no-padding.list-button, .trued6 .chat-item-description .no-padding.list-item {
   padding: 0;
 }
-.trued6 .border .list-item {
+.trued6 .border .list-item, .trued6 .chat-item-description .list-item {
   display: flex;
 }
-.trued6 .border .list-item label {
+.trued6 .border .list-item label, .trued6 .chat-item-description .list-item label {
   flex: 5;
 }
-.trued6 .border .list-button {
+.trued6 .border .list-button, .trued6 .chat-item-description .list-button {
   padding: 5px;
   justify-content: center;
 }
-.trued6 .padding2by5, .trued6 .border .list-item {
+.trued6 .padding2by5, .trued6 .border .list-item, .trued6 .chat-item-description .list-item {
   padding: 2px 5px;
 }
 .trued6 .sheet-tabs {
@@ -349,7 +364,7 @@ button,
 .trued6 .big2, .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor, .trued6 .description-border label {
   font-size: 2em;
 }
-.trued6 .big3, .trued6 .border .label.big {
+.trued6 .big3, .trued6 .border .label.big, .trued6 .chat-item-description .label.big {
   font-size: 3em;
 }
 .trued6 .description-border {

@@ -14,6 +14,7 @@
 
 /* Styles limited to trued6 sheets */
 .trued6 {
+  @import 'components/chat';
   @import 'components/forms';
   @import 'components/resource';
   @import 'components/items';

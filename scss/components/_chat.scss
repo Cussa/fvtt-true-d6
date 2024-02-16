@@ -1,0 +1,21 @@
+.chat-item-description {
+  @extend .border;
+
+  .description {
+    padding: 0px 5px;
+    text-align: justify;
+  }
+
+  .characteristics {
+    float: left;
+    display: flex;
+
+    img {
+      width: 100px;
+    }
+
+    span {
+      flex: 1;
+    }
+  }
+}

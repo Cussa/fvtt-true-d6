@@ -82,7 +82,7 @@
     },
     "skill": {
       "templates": ["base"],
-      "usageType": "none",
+      "usageType": "passive",
       "whenRestUsed": false,
       "whenFailedUsed": false,
       "isSpell": false,

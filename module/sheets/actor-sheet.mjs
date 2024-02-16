@@ -205,6 +205,7 @@ export class Trued6ActorSheet extends ActorSheet {
     html.on('click', '.short-rest-button', this._onShortRest.bind(this));
     html.on('click', '.long-rest-button', this._onLongRest.bind(this));
     html.on('click', '.usable', this._onItemUse.bind(this));
+    html.on('click', '.send-to-chat', this._onItemSendToChat.bind(this));
 
     // Delete Inventory Item
     html.on('click', '.item-delete', (ev) => {
@@ -341,10 +342,19 @@ export class Trued6ActorSheet extends ActorSheet {
   }
 
   async _onItemUse(event){
+    const item = this._getItem(event);
+    await item.updateUsage(null);
+  }
+
+  async _onItemSendToChat(event){
+    const item = this._getItem(event);
+    await item.sendToChat(this.actor);
+  }
+
+  _getItem(event){
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
-    const item = this.actor.items.get(dataset.itemId);
-    await item.updateUsage(null);
+    return this.actor.items.get(dataset.itemId);
   }
 }

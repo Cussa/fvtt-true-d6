@@ -32,13 +32,13 @@
               <div>
                 <select name="system.attribute">
                   {{#select item.system.attribute}}
-                  <option value="">{{localize "TRUED6.Skill.UsageType.none"}}</option>
-                  <option value="str">{{localize "TRUED6.Attributes.Str.abbr"}}</option>
-                  <option value="dex">{{localize "TRUED6.Attributes.Dex.abbr"}}</option>
-                  <option value="con">{{localize "TRUED6.Attributes.Con.abbr"}}</option>
-                  <option value="int">{{localize "TRUED6.Attributes.Int.abbr"}}</option>
-                  <option value="wis">{{localize "TRUED6.Attributes.Wis.abbr"}}</option>
-                  <option value="cha">{{localize "TRUED6.Attributes.Cha.abbr"}}</option>
+                  <option value="">{{localize "TRUED6.none"}}</option>
+                  <option value="Str">{{localize "TRUED6.Attributes.Str.long"}}</option>
+                  <option value="Dex">{{localize "TRUED6.Attributes.Dex.long"}}</option>
+                  <option value="Con">{{localize "TRUED6.Attributes.Con.long"}}</option>
+                  <option value="Int">{{localize "TRUED6.Attributes.Int.long"}}</option>
+                  <option value="Wis">{{localize "TRUED6.Attributes.Wis.long"}}</option>
+                  <option value="Cha">{{localize "TRUED6.Attributes.Cha.long"}}</option>
                   {{/select}}
                 </select>
               </div>
@@ -48,7 +48,7 @@
               <div>
                 <select name="system.usageType">
                   {{#select item.system.usageType}}
-                  <option value="none">{{localize "TRUED6.Skill.UsageType.none"}}</option>
+                  <option value="passive">{{localize "TRUED6.Skill.UsageType.passive"}}</option>
                   <option value="rest">{{localize "TRUED6.Skill.UsageType.rest"}}</option>
                   <option value="fail">{{localize "TRUED6.Skill.UsageType.fail"}}</option>
                   {{/select}}

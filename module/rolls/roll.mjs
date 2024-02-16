@@ -1,5 +1,5 @@
 export class Trued6Roll {
-  static RollTemplate = "systems/trued6/templates/roll/chat.hbs";
+  static RollTemplate = "systems/trued6/templates/chat/roll.hbs";
 
   //RollMode = public, private, blind, gm
   //RollType = attack, defense, melee, ranged, attribute

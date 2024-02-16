@@ -115,7 +115,7 @@
       "Skill": "Skill",
       "UsageType": {
         "label": "Usage Type",
-        "none": "None",
+        "passive": "Passive",
         "rest": "Once Per Rest",
         "fail": "Until Fail"
       },
