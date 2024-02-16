@@ -35,6 +35,10 @@ button,
   align-items: center;
   justify-items: center;
 }
+.grid.gap5,
+.grid-2col.gap5 {
+  gap: 5px;
+}
 .grid-3col {
   grid-column: span 3/span 3;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -229,12 +233,11 @@ button,
   font-family: "Roboto", sans-serif;
 }
 .trued6 .sheet-header .profile-img {
-  width: 120px;
+  width: 100%;
   height: auto;
   border: 2px solid #000;
   border-radius: 10px;
   flex: 0;
-  margin: 0 10px 0 0;
 }
 .trued6 form.npc,
 .trued6 form.player {
@@ -248,6 +251,11 @@ button,
 }
 .trued6 .sheet-header .header-fields {
   flex: 1;
+}
+.trued6 .sheet-header .first-column {
+  width: 120px;
+  flex: 0.25;
+  margin-right: 5px;
 }
 .trued6 .border {
   display: grid;
@@ -291,6 +299,9 @@ button,
 }
 .trued6 .border .input input.top, .trued6 .border .list-button input.top, .trued6 .border .list-item input.top {
   font-size: 3em;
+}
+.trued6 .border .input.no-padding, .trued6 .border .no-padding.list-button, .trued6 .border .no-padding.list-item {
+  padding: 0;
 }
 .trued6 .border .list-item {
   display: flex;

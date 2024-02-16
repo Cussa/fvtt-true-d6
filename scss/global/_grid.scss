@@ -19,6 +19,10 @@
     }
   }
 
+  &.gap5 {
+    gap: 5px;
+  }
+
   &.label:first-child {
     @extend .top-left;
   }
