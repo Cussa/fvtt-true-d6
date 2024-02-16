@@ -108,6 +108,7 @@ export class Trued6Roll {
     }
     else if (data.rollType == "rest") {
       text = game.i18n.localize("TRUED6.Rest");
+      result.isAttack = false;
       this.changeDamageKeyIfIsAttack(result);
     }
     result.flavor = `${text}<br>${data.label.toUpperCase()}`;
