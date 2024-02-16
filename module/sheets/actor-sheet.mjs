@@ -133,11 +133,11 @@ export class Trued6ActorSheet extends ActorSheet {
           i.rollable = true;
           i.rollType = "";
           i.attribute = i.system.attackType;
-          if (i.system.attackType == "str") {
+          if (i.system.attackType == "Str") {
             i.target = context.actor.system.attributes.str.value;
             i.rollType = "Melee";
           }
-          else if (i.system.attackType == "dex") {
+          else if (i.system.attackType == "Dex") {
             i.target = context.actor.system.attributes.dex.value;
             i.rollType = "Ranged";
           }

@@ -45,6 +45,19 @@ export class Trued6Item extends Item {
     return labels.join(this.img ? "<br>" : " - ");
   }
 
+  _getLabelEquipment(labels) {
+    labels.push(game.i18n.localize(`TRUED6.Equipment.${this.system.type}`));
+    if (this.system.attackType)
+      labels.push(game.i18n.localize(`TRUED6.Attributes.${this.system.attackType}.long`));
+    if (this.system.damageBonus)
+      labels.push(`${game.i18n.localize(`TRUED6.Equipment.DmgBonus`)}: ${this.system.damageBonus}`)
+    if (this.system.defenseValue)
+      labels.push(`${game.i18n.localize(`TRUED6.Equipment.Defense`)}: ${this.system.defenseValue}`)
+    if (this.system.forceDisadvantage)
+      labels.push(`${game.i18n.localize(`TRUED6.Equipment.ForceDisadvantage`)}`)
+    return labels.join(this.img ? "<br>" : " - ");
+  }
+
   async sendToChat(actor) {
     const templatePath = `systems/trued6/templates/chat/item.hbs`;
     let funcName = `_getLabel${this.type.capitalize()}`;
