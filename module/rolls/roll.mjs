@@ -49,12 +49,14 @@ export class Trued6Roll {
 
   static getRollFlavor(data, result) {
 
+    let text = "";
     if (data.rollType == "attack")
-      result.flavor = `${game.i18n.localize("TRUED6.DiceRoll.Attack")}: ${data.label}`;
+      text = game.i18n.localize("TRUED6.DiceRoll.Attack");
     if (data.rollType == "attribute") {
-      result.flavor = `${game.i18n.localize("TRUED6.DiceRoll.Attribute")}: ${data.label}`;
+      text = game.i18n.localize("TRUED6.DiceRoll.Attribute");
       result.damage = null;
     }
+    result.flavor = `${text}<br>${data.label.toUpperCase()}`;
   }
 
   static rollFromChat(event) {
