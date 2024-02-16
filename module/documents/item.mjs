@@ -13,19 +13,28 @@ export class Trued6Item extends Item {
   }
 
   async updateUsage(roll) {
-    console.log(roll, this);
-    if (!["skill", "spell"].includes(this.type) || this.system.usageType == "none")
+    if (!["skill"].includes(this.type) || this.system.usageType == "passive")
       return;
 
     if (this.system.usageType == "rest") {
-      this.update({ "system.whenRestUsed": true });
+      await this.update({ "system.whenRestUsed": true });
       return;
     }
 
     if (this.system.usageType == "fail" && roll?.total == 0) {
-      this.update({ "system.whenFailedUsed": true });
+      await this.update({ "system.whenFailedUsed": true });
       return;
     }
+  }
+
+  async refreshUsage() {
+    if (!["skill"].includes(this.type) || this.system.usageType == "none")
+      return;
+
+    await this.update({
+      "system.whenFailedUsed": false,
+      "system.whenRestUsed": false
+    });
   }
 
   _getLabelGeneric(labels) {
@@ -79,7 +88,4 @@ export class Trued6Item extends Item {
     };
     await ChatMessage.create(chatData);
   }
-
-
-
 }

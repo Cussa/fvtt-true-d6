@@ -160,9 +160,9 @@ export class Trued6ActorSheet extends ActorSheet {
       else if (i.type == "skill") {
         i.isUsed = i.system.whenRestUsed || i.system.whenFailedUsed;
         i.rollable = i.system.attribute && !i.isUsed;
-        i.usable = !i.system.attribute && !i.isUsed && i.system.usageType != "none";
+        i.usable = !i.system.attribute && !i.isUsed && i.system.usageType != "passive";
 
-        i.isUsedInfo = game.i18n.localize(i.isUsed ? "Yes" : "No");
+        i.isUsedInfo = i.system.usageType != "passive" ? game.i18n.localize(i.isUsed ? "Yes" : "No") : null;
         i.rollType = i.system.isSpell ? "spell" : "skill";
         skills.push(i);
       }
@@ -205,6 +205,7 @@ export class Trued6ActorSheet extends ActorSheet {
     html.on('click', '.short-rest-button', this._onShortRest.bind(this));
     html.on('click', '.long-rest-button', this._onLongRest.bind(this));
     html.on('click', '.usable', this._onItemUse.bind(this));
+    html.on('click', '.refreshUse', this._onItemRefresh.bind(this));
     html.on('click', '.send-to-chat', this._onItemSendToChat.bind(this));
 
     // Delete Inventory Item
@@ -304,7 +305,7 @@ export class Trued6ActorSheet extends ActorSheet {
     }
 
     if (buttonKeys.length == 1) {
-      await this.actor.items.get(buttonKeys[0]).update({ "system.whenRestUsed": false, "system.whenFailedUsed": false });
+      await this.actor.items.get(buttonKeys[0]).refreshUsage();
       ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
       return;
     }
@@ -315,7 +316,7 @@ export class Trued6ActorSheet extends ActorSheet {
       close: () => { return false; }
     });
 
-    await this.actor.items.get(dialogOutput).update({ "system.whenRestUsed": false, "system.whenFailedUsed": false });
+    await this.actor.items.get(dialogOutput).refreshUsage();
     ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
   }
 
@@ -333,9 +334,7 @@ export class Trued6ActorSheet extends ActorSheet {
     await this.actor.update({ "system.health.current": newHealth });
 
     for (let i of this.actor.items) {
-      if (i.type != "skill")
-        continue;
-      await i.update({ "system.whenRestUsed": false, "system.whenFailedUsed": false });
+      await i.refreshUsage();
     }
 
     ui.notifications.info(game.i18n.localize("TRUED6.LongRest"));
@@ -344,6 +343,11 @@ export class Trued6ActorSheet extends ActorSheet {
   async _onItemUse(event){
     const item = this._getItem(event);
     await item.updateUsage(null);
+  }
+
+  async _onItemRefresh(event){
+    const item = this._getItem(event);
+    await item.refreshUsage();
   }
 
   async _onItemSendToChat(event){
