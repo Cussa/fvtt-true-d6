@@ -130,7 +130,7 @@ export class Trued6ActorSheet extends ActorSheet {
       }
       else if (i.type === 'equipment') {
         if (i.system.type == "Weapon") {
-          i.cssClass = "rollable";
+          i.rollable = true;
           i.rollType = "";
           i.attribute = i.system.attackType;
           if (i.system.attackType == "str") {
@@ -144,13 +144,13 @@ export class Trued6ActorSheet extends ActorSheet {
           i.label = i.name;
         }
         else if (i.system.type == "Armour") {
-          i.cssClass = "rollable";
+          i.rollable = false;
           i.rollType = "Defense";
           i.label = i.name;
           i.target = i.system.defenseValue;
         }
         else if (i.system.type == "Shield") {
-          i.cssClass = "rollable";
+          i.rollable = false;
           i.rollType = "Defense";
           i.label = i.name;
           i.target = i.system.defenseValue;
@@ -159,8 +159,7 @@ export class Trued6ActorSheet extends ActorSheet {
       }
       else if (i.type == "skill") {
         i.isUsed = i.system.whenRestUsed || i.system.whenFailedUsed;
-        if (i.system.attribute)
-          i.cssClass = i.isUsed ? null : "rollable";
+        i.rollable = i.system.attribute && !i.isUsed;
 
         i.isUsedInfo = game.i18n.localize(i.isUsed ? "Yes" : "No");
         i.rollType = i.system.isSpell ? "spell" : "skill";

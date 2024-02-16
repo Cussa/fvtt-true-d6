@@ -12,14 +12,14 @@ export class Trued6Roll {
   };
 
   static getRollStyle(event, data, rollData) {
-    if (data.forceAdvantage)
-      return this.RollStyles.Advantage;
-    if (data.forceDisadvantage)
+    if (event.altKey ||
+      data.forceDisadvantage)
       return this.RollStyles.Disadvantage;
-    if (event.altKey)
-      return this.RollStyles.Disadvantage;
-    if (event.shiftKey)
+
+    if (event.shiftKey ||
+      data.forceAdvantage)
       return this.RollStyles.Advantage;
+
     if (rollData.forceDisadvantage) {
       if ((data.attribute && rollData.forceDisadvantage[data.attribute?.toLowerCase()])
         || data.rollData?.forceDisadvantage[data.rollType.toLowerCase()])
@@ -33,75 +33,77 @@ export class Trued6Roll {
     return this.RollStyles.Normal;
   }
 
-  static getRollResult(actor, data, roll, rollType) {
+  static getRollResult(actor, data, roll, rollStyle, actorRollData) {
     let result = {
-      textKey: "TRUED6.DiceRoll.Failure",
-      cssClass: "failure",
-      damageKey: "TRUED6.DiceRoll.Damage",
-      damage: null,
-      rollStyle: 0,
+      textKey: roll.total > 0 ? "TRUED6.DiceRoll.Success" : "TRUED6.DiceRoll.Failure",
+      isSuccess: roll.total > 0,
+      cssClass: roll.total > 0 ? "success" : "failure",
+      resultKey: "TRUED6.DiceRoll.Damage",
+      resultValue: roll.terms[0].results[0].result,
+      rollStyle: rollStyle,
       isAttack: true
     };
 
-    this.getRollFlavor(data, result);
+    this.getRollFlavor(data, result, actorRollData);
 
-    if (rollType == this.RollStyles.Advantage)
-      result.rollStyle = this.RollStyles.Advantage;
-
-    if (roll.total == 0)
+    if (!result.isSuccess) {
+      if (result.rollStyle == this.RollStyles.Disadvantage)
+        result.rollStyle = this.RollStyles.Normal;
+      result.resultValue = null;
       return result;
-
-    result.textKey = "TRUED6.DiceRoll.Success";
-    result.cssClass = "success";
-    result.damage = roll.terms[0].results[0].result;
-
-    if (rollType == this.RollStyles.Disadvantage)
-      result.rollStyle = this.RollStyles.Disadvantage;
+    }
 
     if (actor.type == "npc")
       return result;
 
-    if (result.damage == data.target && result.isAttack) {
-      result.damage++;
+    if (result.resultValue == data.target && result.isAttack) {
+      result.resultValue++;
       result.textKey = "TRUED6.DiceRoll.CriticalSuccess";
       result.critical = true;
     }
 
     if (data.dmgBonus)
-      result.damage += parseInt(data.dmgBonus);
+      result.resultValue += parseInt(data.dmgBonus);
 
     this.removeDamageIfNecessary(result, data);
+
+    result.resultValue = result.resultValue < 0 ? game.i18n.localize("TRUED6.DiceRoll.All") : result.resultValue?.toString();
 
     return result;
   }
 
-  static getRollFlavor(data, result) {
+  static getRollFlavor(data, result, actorRollData) {
 
     let text = "";
-    result.isAttack = /^true$/i.test(data.isAttack);
-
     if (data.rollType == "Melee")
       text = `${game.i18n.localize("TRUED6.Attacks.Melee")} ${game.i18n.localize("TRUED6.DiceRoll.Attack")}`;
     else if (data.rollType == "Ranged")
       text = `${game.i18n.localize("TRUED6.Attacks.Ranged")} ${game.i18n.localize("TRUED6.DiceRoll.Attack")}`;
     else if (data.rollType == "attack")
       text = game.i18n.localize("TRUED6.DiceRoll.Attack");
-    else if (data.rollType == "Defense") {
+    else if (data.rollType == "defense") {
       text = game.i18n.localize("TRUED6.Attacks.Defense");
-      result.damageKey = "TRUED6.DiceRoll.Avoid";
+      result.resultKey = "TRUED6.DiceRoll.Avoid";
       result.isAttack = false;
+      if (actorRollData.defenseStats.shield.value > 0 &&
+        actorRollData.defenseStats.armour.value > 0 &&
+        result.resultValue == 1) {
+        result.resultValue = -100;
+      }
     }
     else if (data.rollType == "attribute") {
       text = game.i18n.localize("TRUED6.DiceRoll.Attribute");
-      result.damage = null;
+      result.resultValue = null;
       result.isAttack = false;
     }
     else if (data.rollType == "skill") {
       text = game.i18n.localize("TRUED6.Skill.Skill");
+      result.isAttack = /^true$/i.test(data.isAttack);
       this.changeDamageKeyIfIsAttack(result);
     }
     else if (data.rollType == "spell") {
       text = game.i18n.localize("TRUED6.Skill.Spell");
+      result.isAttack = /^true$/i.test(data.isAttack);
       this.changeDamageKeyIfIsAttack(result);
     }
     else if (data.rollType == "rest") {
@@ -113,13 +115,13 @@ export class Trued6Roll {
 
   static changeDamageKeyIfIsAttack(result) {
     if (!result.isAttack) {
-      result.damageKey = "TRUED6.Skill.RollResult";
+      result.resultKey = "TRUED6.Skill.RollResult";
     }
   }
 
   static removeDamageIfNecessary(result, data) {
-    if (["attribute"].includes(data.rollType))
-      result.damage = null;
+    if (["attribute"].includes(data.rollType) || result.total == 0 || result.resultValue == 0)
+      result.resultValue = null;
   }
 
   static async rollFromChat(event) {
@@ -143,12 +145,12 @@ export class Trued6Roll {
   static async roll(actor, data, event) {
     const actorRollData = actor.getRollData();
     const rollStyle = this.getRollStyle(event, data, actorRollData);
-    if (!data.target && !data.attribute)
-      data.target = actorRollData[data.attribute.toLowerCase()].value;
+    if (!data.target && data.attribute && data.attribute != "none")
+      data.target = actorRollData[data.attribute.toLowerCase()]?.value;
     const rollFormula = data.formula ?? `1d6cs<=${data.target}`;
 
     let attackRoll = await this.createRoll(rollFormula, actorRollData);
-    return await this.sendRollToChat(attackRoll, actor, data, rollStyle);
+    return await this.sendRollToChat(attackRoll, actor, data, rollStyle, actorRollData);
   }
 
   static async createRoll(rollFormula) {
@@ -157,7 +159,7 @@ export class Trued6Roll {
     return attackRoll;
   }
 
-  static async sendRollToChat(roll, actor, data, rollStyle) {
+  static async sendRollToChat(roll, actor, data, rollStyle, actorRollData) {
     let chatData = {
       user: game.user.id,
       speaker: {
@@ -168,7 +170,7 @@ export class Trued6Roll {
     };
     let rollMode = game.settings.get("core", "rollMode");
     let isPrivate = false;
-    let rollResult = this.getRollResult(actor, data, roll, rollStyle);
+    let rollResult = this.getRollResult(actor, data, roll, rollStyle, actorRollData);
 
     if (["gmroll", "blindroll"].includes(rollMode)) {
       chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
@@ -181,8 +183,8 @@ export class Trued6Roll {
       total: isPrivate ? "?" : Math.round(roll.total * 100) / 100,
       rollResult: isPrivate ? "?" : rollResult.textKey,
       cssClass: isPrivate ? null : rollResult.cssClass,
-      damageKey: isPrivate ? "?" : rollResult.damageKey,
-      damage: isPrivate ? null : rollResult.damage,
+      damageKey: isPrivate ? "?" : rollResult.resultKey,
+      damage: isPrivate ? null : rollResult.resultValue,
       rollStyle: isPrivate ? null : rollResult.rollStyle,
       data: data,
       actorId: actor.id

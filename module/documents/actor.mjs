@@ -44,15 +44,39 @@ export class Trued6Actor extends Actor {
   _prepareCharacterData(actorData) {
     if (actorData.type !== 'player') return;
 
-    const highestArmour = Math.max(...(actorData.items
-      .filter(it => it.type == "equipment" && it.system.type == "Armour")
-      .map(o => o.system.defenseValue)), 0);
-    const highestShield = Math.max(...(actorData.items
-      .filter(it => it.type == "equipment" && it.system.type == "Shield")
-      .map(o => o.system.defenseValue)), 0);
-    actorData.system.defense = Math.max(highestArmour, highestShield, 0);
-    actorData.system.hasArmour = highestArmour > 0;
-    actorData.system.hasShield = highestShield > 0;
+    const defenseStats = {
+      armour: {
+        value: 0,
+        name: null
+      },
+      shield: {
+        value: 0,
+        name: null
+      },
+      value: 0,
+      label: ""
+    };
+
+    for (let i of actorData.items.filter(it => it.type == "equipment")) {
+      if (i.system.type == "Weapon")
+        continue;
+      var currentValue = i.system.defenseValue;
+      var currentName = i.name;
+      var currentStat = defenseStats[i.system.type.toLowerCase()]
+      if (currentStat.value < currentValue) {
+        currentStat.value = currentValue;
+        currentStat.name = currentName;
+        if (defenseStats.value < currentValue)
+          defenseStats.value = currentValue;
+      }
+    }
+    var labels = [];
+    if (defenseStats.armour.value)
+      labels.push(defenseStats.armour.name);
+    if (defenseStats.shield.value)
+      labels.push(defenseStats.shield.name);
+    defenseStats.label = labels.join(" + ");
+    actorData.system.defenseStats = defenseStats;
   }
 
   /**

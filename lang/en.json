@@ -74,6 +74,7 @@
       "Melee": "Melee",
       "Ranged": "Ranged",
       "Defense": "Defense",
+      "DefenseWithShield": "Defense with Shield",
       "Number": "Number",
       "Target": "Target",
       "Special": "Special",
@@ -87,6 +88,7 @@
       "Failure": "Failure",
       "Damage": "Damage",
       "Avoid": "Avoid",
+      "All": "ALL",
       "Reroll": "Reroll",
       "DiscardedByAdvantage": "Discarded by Advantage",
       "DiscardedByDisadvantage": "Discarded by Disadvantage"

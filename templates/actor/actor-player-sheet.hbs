@@ -9,11 +9,13 @@
           <span>{{localize "TRUED6.HP.HP"}}</span>
         </div>
         <div class="input no-padding align-right grid-span-3">
-          <input name="system.health.current" type="number" value="{{system.health.current}}" data-tooltip="{{localize "TRUED6.HP.CurrentHP"}}" />
+          <input name="system.health.current" type="number" value="{{system.health.current}}" data-tooltip="{{localize "
+            TRUED6.HP.CurrentHP"}}" />
         </div>
         <label class="shrink">/</label>
         <div class="input no-padding align-center grid-span-3">
-          <input name="system.health.max" type="number" value="{{system.health.max}}" data-tooltip="{{localize "TRUED6.HP.MaxHP"}}" />
+          <input name="system.health.max" type="number" value="{{system.health.max}}" data-tooltip="{{localize "
+            TRUED6.HP.MaxHP"}}" />
         </div>
       </div>
     </div>
@@ -48,12 +50,19 @@
         </div>
 
         <div class="label grid-span-3 bottom-left">
-          <span>{{localize "TRUED6.Attacks.Defense"}}</span>
+          <span>{{localize "TRUED6.Attacks.Defense"}}
+            {{#if system.defenseStats.value}}
+            <a class='rollable' data-roll-type='defense' data-label="{{system.defenseStats.label}}"
+              data-target="{{system.defenseStats.value}}">
+              <i class='fas fa-dice'></i>
+            </a>
+            {{/if}}
+          </span>
         </div>
         <div class="input grid-span-3">
-          <input readonly type="number" value="{{system.defense}}" />
+          <input readonly type="number" value="{{system.defenseStats.value}}" />
         </div>
-        
+
         <div class="input grid-span-3 align-right">
           <input name="system.coins" type="number" value="{{system.coins}}" />
         </div>
@@ -86,14 +95,14 @@
     <div class="tab biography" data-group="primary" data-tab="description">
       {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to
       the rollData property. --}}
-      
-        <div class="description-border">
-          <label>{{localize "Description"}}</label>
-          <div class="box">
-            {{editor system.description target="system.description" rollData=rollData button=true owner=owner
-            editable=editable}}
-          </div>
+
+      <div class="description-border">
+        <label>{{localize "Description"}}</label>
+        <div class="box">
+          {{editor system.description target="system.description" rollData=rollData button=true owner=owner
+          editable=editable}}
         </div>
+      </div>
     </div>
 
     {{!-- Owned Skills Tab --}}

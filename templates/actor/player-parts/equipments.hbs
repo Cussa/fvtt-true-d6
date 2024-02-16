@@ -27,10 +27,12 @@
     </div>
     <div class='item-prop'>{{ item.system.damageBonus}} / {{ item.system.defenseValue }}</div>
     <div class='item-controls'>
-      <a class='{{item.cssClass}}' data-roll-type='{{item.rollType}}' data-target="{{item.target}}"
+      {{#if item.rollable}}
+      <a class='rollable' data-roll-type='{{item.rollType}}' data-target="{{item.target}}"
         data-label="{{item.label}}" data-dmg-bonus="{{item.system.damageBonus}}" data-attribute="{{item.attribute}}">
         <i class='fas fa-dice'></i>
       </a>
+      {{/if}}
       <a class='item-control item-edit'
         title='{{localize "DOCUMENT.Edit" type=(localize (concat "TYPES.Item.equipment"))}}'>
         <i class='fas fa-edit'></i>

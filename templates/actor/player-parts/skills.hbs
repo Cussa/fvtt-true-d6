@@ -23,9 +23,11 @@
     </div>
     <div class='item-prop'>{{ item.isUsedInfo }}</div>
     <div class='item-controls'>
-      <a class='{{item.cssClass}}' data-roll-type='{{item.rollType}}' data-is-attack="{{item.system.isAttack}}" data-is-spell="{{item.system.isSpell}}" data-label="{{item.name}}" data-attribute="{{item.system.attribute}}" data-item-id="{{item._id}}">
+      {{#if item.rollable}}
+      <a class='rollable' data-roll-type='{{item.rollType}}' data-is-attack="{{item.system.isAttack}}" data-is-spell="{{item.system.isSpell}}" data-label="{{item.name}}" data-attribute="{{item.system.attribute}}" data-item-id="{{item._id}}">
         <i class='fas fa-dice'></i>
       </a>
+      {{/if}}
       <a class='item-control item-edit'
         title='{{localize "DOCUMENT.Edit" type=(localize (concat "TYPES.Item.skill"))}}'>
         <i class='fas fa-edit'></i>
