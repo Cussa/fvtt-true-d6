@@ -69,7 +69,8 @@ export class Trued6ActorSheet extends ActorSheet {
       this.actor.allApplicableEffects()
     );
 
-    console.log(context);
+    if (CONFIG.TRUED6.debug)
+      console.log(context);
     return context;
   }
 
