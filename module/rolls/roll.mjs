@@ -205,5 +205,9 @@ export class Trued6Roll {
       const attackRoll = this.createRoll(roll.formula);
       this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal);
     }
+    if (rollStyle == this.RollStyles.Normal && data.itemId){
+      let item = actor.items.get(data.itemId);
+      item.updateUsage(roll);
+    }
   }
 }

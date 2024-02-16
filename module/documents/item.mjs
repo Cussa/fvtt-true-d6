@@ -70,4 +70,20 @@ export class Trued6Item extends Item {
       return roll;
     }
   }
+
+  updateUsage(roll) {
+    console.log(roll, this);
+    if (!["skill", "spell"].includes(this.type) || this.system.usageType == "none")
+      return;
+
+    if (this.system.usageType == "rest") {
+      this.update({ "system.whenRestUsed": true });
+      return;
+    }
+
+    if (this.system.usageType == "fail" && roll.total == 0) {
+      this.update({ "system.whenFailedUsed": true });
+      return;
+    }
+  }
 }

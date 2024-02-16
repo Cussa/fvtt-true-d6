@@ -158,21 +158,24 @@ export class Trued6ActorSheet extends ActorSheet {
         equipments.push(i);
       }
       else if (i.type == "skill") {
+        i.isUsed = i.system.whenRestUsed || i.system.whenFailedUsed;
         if (i.system.attribute)
-          i.cssClass = "rollable";
+          i.cssClass = i.isUsed ? null : "rollable";
+        
+        i.isUsedInfo = game.i18n.localize(i.isUsed ? "Yes" : "No");
         i.rollType = i.system.isSpell ? "spell" : "skill";
         skills.push(i);
       }
     }
 
     // Assign and return
-    context.gear = gear.sort((a,b) => a.name.localeCompare(b.name));
-    context.features = features.sort((a,b) => a.name.localeCompare(b.name));
-    context.extraAttacks = extraAttacks.sort((a,b) => a.name.localeCompare(b.name));
+    context.gear = gear.sort((a, b) => a.name.localeCompare(b.name));
+    context.features = features.sort((a, b) => a.name.localeCompare(b.name));
+    context.extraAttacks = extraAttacks.sort((a, b) => a.name.localeCompare(b.name));
     context.equipments = equipments
-      .sort((a,b) => a.name.localeCompare(b.name))
-      .sort((a,b) => a.system.type.localeCompare(b.system.type));
-    context.skills = skills.sort((a,b) => a.name.localeCompare(b.name));
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => a.system.type.localeCompare(b.system.type));
+    context.skills = skills.sort((a, b) => a.name.localeCompare(b.name));
 
     if (this.actor.type == "npc") {
       context.system.melee.cssClass = context.system.melee.value > 0 ? "rollable" : "";
