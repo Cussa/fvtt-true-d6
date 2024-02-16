@@ -111,6 +111,7 @@ export class Trued6ActorSheet extends ActorSheet {
     const gear = [];
     const features = [];
     const extraAttacks = [];
+    const equipments = [];
     const spells = {
       0: [],
       1: [],
@@ -144,6 +145,34 @@ export class Trued6ActorSheet extends ActorSheet {
       else if (i.type === 'extraAttack') {
         extraAttacks.push(i);
       }
+      else if (i.type === 'equipment') {
+        if (i.system.type == "Weapon") {
+          i.cssClass = "rollable";
+          i.rollType = "";
+          if (i.system.attackType == "str") {
+            i.target = context.actor.system.attributes.str.value;
+            i.rollType = "Melee";
+          }
+          else if (i.system.attackType == "dex") {
+            i.target = context.actor.system.attributes.dex.value;
+            i.rollType = "Ranged";
+          }
+          i.label = i.name;
+        }
+        else if (i.system.type == "Armour") {
+          i.cssClass = "rollable";
+          i.rollType = "Defense";
+          i.label = i.name;
+          i.target = i.system.defenseValue;
+        }
+        else if (i.system.type == "Shield") {
+          i.cssClass = "rollable";
+          i.rollType = "Defense";
+          i.label = i.name;
+          i.target = i.system.defenseValue;
+        }
+        equipments.push(i);
+      }
     }
 
     // Assign and return
@@ -151,6 +180,7 @@ export class Trued6ActorSheet extends ActorSheet {
     context.features = features;
     context.extraAttacks = extraAttacks;
     context.spells = spells;
+    context.equipments = equipments;
 
     if (this.actor.type == "npc") {
       context.system.melee.cssClass = context.system.melee.value > 0 ? "rollable" : "";

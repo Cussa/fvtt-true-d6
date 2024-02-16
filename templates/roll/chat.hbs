@@ -9,9 +9,13 @@
         {{localize rollResult}}
         {{#if damage}}
         <br>
-        <label>{{localize "TRUED6.DiceRoll.Damage"}}: {{damage}}</label>
+        <label>{{localize damageKey}}: {{damage}}</label>
         {{/if}}
-        {{#if (eq rollType 2)}}
+        {{#if (and data.special damage)}}
+        <br>
+        <label>{{data.special}}</label>
+        {{/if}}
+        {{#if (eq rollStyle 2)}}
         <br>
         <label class="failure">{{localize "TRUED6.DiceRoll.DiscardedByDisadvantage"}}</label>
         {{/if}}
@@ -19,8 +23,8 @@
       </h4>
     </div>
   </div>
-  {{#if (eq rollType 1)}}
+  {{#if (eq rollStyle 1)}}
   <button class="chat-reroll" data-target="{{data.target}}" data-roll-type="{{data.rollType}}" data-label="{{data.name}}"
-    data-actor-id="{{actorId}}"><i class="fas fa-dice"></i>{{localize "TRUED6.DiceRoll.Reroll"}}</button>
+    data-actor-id="{{actorId}}" data-special="{{data.special}}"><i class="fas fa-dice"></i>{{localize "TRUED6.DiceRoll.Reroll"}}</button>
   {{/if}}
 </div>

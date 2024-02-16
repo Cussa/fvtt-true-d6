@@ -44,14 +44,15 @@ export class Trued6Actor extends Actor {
   _prepareCharacterData(actorData) {
     if (actorData.type !== 'player') return;
 
-    // // Make modifications to data here. For example:
-    // const systemData = actorData.system;
-
-    // // Loop through ability scores, and add their modifiers to our sheet output.
-    // for (let [key, ability] of Object.entries(systemData.attributes)) {
-    //   // Calculate the modifier using d20 rules.
-    //   ability.mod = Math.floor((ability.value - 10) / 2);
-    // }
+    const highestArmour = Math.max(...(actorData.items
+      .filter(it => it.type == "equipment" && it.system.type == "Armour")
+      .map(o => o.system.defenseValue)));
+    const highestShield = Math.max(...(actorData.items
+      .filter(it => it.type == "equipment" && it.system.type == "Shield")
+      .map(o => o.system.defenseValue)));
+    actorData.system.defense = Math.max(highestArmour, highestShield);
+    actorData.system.hasArmour = highestArmour > 0;
+    actorData.system.hasShield = highestShield > 0;
   }
 
   /**
@@ -91,11 +92,6 @@ export class Trued6Actor extends Actor {
       for (let [k, v] of Object.entries(data.attributes)) {
         data[k] = foundry.utils.deepClone(v);
       }
-    }
-
-    // Add level for easier access, or fall back to 0.
-    if (data.attributes.level) {
-      data.lvl = data.attributes.level.value ?? 0;
     }
   }
 

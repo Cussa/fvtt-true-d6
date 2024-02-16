@@ -31,9 +31,9 @@ form.player {
     @extend %profile-img;
   }
 
-  .first-column{
+  .first-column {
     width: 120px;
-    flex:0.25;
+    flex: 0.25;
     margin-right: 5px;
   }
 }
@@ -92,7 +92,8 @@ form.player {
         font-size: $font-header-size;
       }
     }
-    &.no-padding{
+
+    &.no-padding {
       padding: 0;
     }
   }
@@ -154,6 +155,7 @@ form.player {
 .big1 {
   font-size: 1em;
 }
+
 .big1-5 {
   font-size: 1.5em;
 }
@@ -164,4 +166,32 @@ form.player {
 
 .big3 {
   font-size: 3em;
+}
+
+.description-border {
+  border: 2px solid $c-black;
+  border-radius: 10px;
+
+  label {
+    @extend .big2;
+    display: flex;
+    color: $c-dark;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+    background: $c-gray-background;
+    border-radius: 0;
+    justify-content: center;
+    border-radius: 10px 10px 0 0;
+  }
+
+  div.box {
+    padding: 0px 5px 5px 5px;
+    height: 200px;
+    //overflow-y: auto;
+  }
+
+  // .editor-content {
+  //   overflow-y: auto;
+  // }
 }

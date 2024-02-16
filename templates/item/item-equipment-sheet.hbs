@@ -1,0 +1,86 @@
+<form class="{{cssClass}} item-sheet" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="header-fields">
+      <div class="border grid-12col">
+        <div class="input grid-span-12 separator-line big3">
+          <input name="name" type="text" value="{{item.name}}" placeholder="Name" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  {{!-- <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">Description</a>
+  </nav> --}}
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div class="tab active" data-group="primary" data-tab="description">
+      <div class="grid">
+        <div>
+          <div class="border">
+            <div class="label top-left top-right big2" class="flexrow">
+              <label>{{localize "TRUED6.Equipment.Characteristics"}}</label>
+            </div>
+            <div class="flexrow align-center">
+              <label class="label big1-5">{{localize "TRUED6.Equipment.Type"}}</label>
+              <div>
+                <select name="system.type">
+                  {{#select item.system.type}}
+                  <option value="Weapon">{{localize "TRUED6.Equipment.Weapon"}}</option>
+                  <option value="Armour">{{localize "TRUED6.Equipment.Armour"}}</option>
+                  <option value="Shield">{{localize "TRUED6.Equipment.Shield"}}</option>
+                  {{/select}}
+                </select>
+              </div>
+            </div>
+            <div class="flexrow align-center">
+              <label class="label big1-5">{{localize "TRUED6.Equipment.AttackType"}}</label>
+              <div>
+                <select name="system.attackType">
+                  {{#select item.system.attackType}}
+                  <option value="">{{localize "TRUED6.Equipment.None"}}</option>
+                  <option value="str">{{localize "TRUED6.Attributes.Str.long"}}</option>
+                  <option value="dex">{{localize "TRUED6.Attributes.Dex.long"}}</option>
+                  {{/select}}
+                </select>
+              </div>
+            </div>
+            <div class="flexrow align-center">
+              <label class="label big1-5">{{localize "TRUED6.Equipment.DmgBonus"}}</label>
+              <div>
+                <input type="number" name="system.damageBonus" value="{{item.system.damageBonus}}" />
+              </div>
+            </div>
+            <div class="flexrow align-center">
+              <label class="label big1-5">{{localize "TRUED6.Equipment.Defense"}}</label>
+              <div>
+                <input type="number" name="system.defenseValue" value="{{item.system.defenseValue}}" />
+              </div>
+            </div>
+            <div class="flexrow align-center">
+              <label class="label big1-5 bottom-left">{{localize "TRUED6.Equipment.ForceDisadvantage"}}</label>
+              <div>
+                <input type="checkbox" name="system.forceDisadvantage" {{checked item.system.forceDisadvantage}}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="description-border">
+          <label>{{localize "Description"}}</label>
+          <div class="box">
+            {{editor system.description target="system.description" rollData=rollData button=true owner=owner
+            editable=editable}}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</form>

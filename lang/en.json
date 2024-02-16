@@ -65,9 +65,11 @@
     "Attacks": {
       "Melee": "Melee",
       "Ranged": "Ranged",
+      "Defense": "Defense",
       "Number": "Number",
       "Target": "Target",
-      "Special": "Special"
+      "Special": "Special",
+      "":""
     },
     "ExtraAttacks": "Extra Attacks",
     "Features": "Features",
@@ -78,6 +80,7 @@
       "CriticalSuccess": "Critical Success",
       "Failure": "Failure",
       "Damage": "Damage",
+      "Avoid": "Avoid",
       "Reroll": "Reroll",
       "DiscardedByAdvantage": "Discarded by Advantage",
       "DiscardedByDisadvantage": "Discarded by Disadvantage"
@@ -87,6 +90,19 @@
       "Level": "Total Level",
       "Race": "Race/bonus",
       "Coins": "Coins"
+    },
+    "Equipment": {
+      "Characteristics": "Characteristics",
+      "Type": "Type",
+      "Weapon": "Weapon",
+      "Armour": "Armour",
+      "Shield": "Shield",
+      "AttackType": "Attack Type",
+      "None": "None",
+      "DmgBonus": "Dmg Bonus",
+      "Defense":"Defense",
+      "ForceDisadvantage" :"Force Disadv.",
+      "":""
     }
   },
   "TYPES": {
@@ -98,7 +114,8 @@
       "item": "Item",
       "feature": "Feature",
       "spell": "Spell",
-      "extraAttack": "Extra Attack"
+      "extraAttack": "Extra Attack",
+      "equipment": "Equipment"
     }
   }
 }

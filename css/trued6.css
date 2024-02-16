@@ -346,11 +346,30 @@ button,
 .trued6 .big1-5 {
   font-size: 1.5em;
 }
-.trued6 .big2, .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor {
+.trued6 .big2, .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor, .trued6 .description-border label {
   font-size: 2em;
 }
 .trued6 .big3, .trued6 .border .label.big {
   font-size: 3em;
+}
+.trued6 .description-border {
+  border: 2px solid #000;
+  border-radius: 10px;
+}
+.trued6 .description-border label {
+  display: flex;
+  color: #191813;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+  background: #c0c0c0;
+  border-radius: 0;
+  justify-content: center;
+  border-radius: 10px 10px 0 0;
+}
+.trued6 .description-border div.box {
+  padding: 0px 5px 5px 5px;
+  height: 200px;
 }
 .trued6 .resource-label {
   font-weight: bold;

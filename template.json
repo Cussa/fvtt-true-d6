@@ -53,7 +53,7 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "spell", "extraAttack"],
+    "types": ["item", "feature", "spell", "extraAttack", "equipment"],
     "templates": {
       "base": {
         "description": ""
@@ -61,8 +61,6 @@
     },
     "item": {
       "templates": ["base"],
-      "quantity": 1,
-      "weight": 0,
       "formula": "d20 + @str.mod + ceil(@lvl / 2)"
     },
     "feature": {
@@ -74,6 +72,14 @@
     "spell": {
       "templates": ["base"],
       "spellLevel": 1
+    },
+    "equipment": {
+      "templates": ["base"],
+      "type": "Weapon",
+      "attackType": "",
+      "damageBonus": 0,
+      "forceDisadvantage": false,
+      "defenseValue": 0
     }
   }
 }
