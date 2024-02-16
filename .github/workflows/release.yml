@@ -26,7 +26,7 @@ jobs:
         flags: "{}"
 
     # Create a zip file with all files required by the system to add to the release
-    - run: zip -r ${{ env.package_type }}.zip LICENSE README.md system.json template.json asset/ css/ lang/ lib/ module/ packs/ templates/
+    - run: zip -r ${{ env.package_type }}.zip LICENSE README.md system.json template.json assets/ css/ lang/ lib/ module/ packs/ templates/
 
     # Create a release for this specific version
     - name: Update Release with Files
