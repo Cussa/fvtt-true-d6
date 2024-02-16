@@ -339,6 +339,9 @@ button,
 .trued6 .sheet-body .tab .editor {
   height: 99%;
 }
+.trued6 .tox {
+  min-height: 200px;
+}
 .trued6 .tox .tox-editor-container {
   background: #fff;
 }
@@ -384,7 +387,10 @@ button,
 }
 .trued6 .description-border div.box {
   padding: 0px 5px 5px 5px;
-  height: 200px;
+  min-height: 200px;
+}
+.trued6 .description-border div.box .editor {
+  min-height: 200px;
 }
 .trued6 .resource-label {
   font-weight: bold;

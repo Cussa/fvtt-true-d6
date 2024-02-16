@@ -130,6 +130,7 @@ form.player {
 }
 
 .tox {
+  min-height: 200px;
   .tox-editor-container {
     background: $c-white;
   }
@@ -187,13 +188,12 @@ form.player {
 
   div.box {
     padding: 0px 5px 5px 5px;
-    height: 200px;
+    min-height: 200px;
     //overflow-y: auto;
+    .editor{
+      min-height: 200px;
+    }
   }
-
-  // .editor-content {
-  //   overflow-y: auto;
-  // }
 }
 
 .usable {
