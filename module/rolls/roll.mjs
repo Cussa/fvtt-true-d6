@@ -22,12 +22,12 @@ export class Trued6Roll {
 
     if (rollData.forceDisadvantage) {
       if ((data.attribute && rollData.forceDisadvantage[data.attribute?.toLowerCase()])
-        || data.rollData?.forceDisadvantage[data.rollType.toLowerCase()])
+        || rollData?.forceDisadvantage[data.rollType.toLowerCase()])
         return this.RollStyles.Disadvantage;
     }
     if (rollData.forceAdvantage) {
       if ((data.attribute && rollData.forceAdvantage[data.attribute?.toLowerCase()])
-        || data.rollData?.forceAdvantage[data.rollType.toLowerCase()])
+        || rollData?.forceAdvantage[data.rollType.toLowerCase()])
         return this.RollStyles.Advantage;
     }
     return this.RollStyles.Normal;
