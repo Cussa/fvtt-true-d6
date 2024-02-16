@@ -16,7 +16,6 @@ export class Trued6Item extends Item {
 
     const equipped = this.system.equipped;
     for (let effect of this.effects) {
-      effect.transfer = equipped;
       effect.disabled = !equipped;
     }
   }
