@@ -47,16 +47,22 @@ export class Trued6Roll {
     return result;
   }
 
-  static getRollFlavor(data) {
+  static getRollFlavor(data, result) {
+
     if (data.rollType == "attack")
-      return `${game.i18n.localize("TRUED6.DiceRoll.Attack")}: ${data.name}`;
+      result.flavor = `${game.i18n.localize("TRUED6.DiceRoll.Attack")}: ${data.label}`;
+    if (data.rollType == "attribute") {
+      result.flavor = `${game.i18n.localize("TRUED6.DiceRoll.Attribute")}: ${data.label}`;
+      result.damage = null;
+    }
   }
 
   static rollFromChat(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
-    
+
+    console.log(dataset);
     const actor = game.actors.get(dataset.actorId);
 
     const messageDiv = $(element).closest(".chat-message.message");
@@ -65,7 +71,7 @@ export class Trued6Roll {
     newContent.find(".advantage").css("display", "block");
     newContent.find(".chat-reroll").remove();
 
-    message.update({ content: newContent[0].outerHTML});
+    message.update({ content: newContent[0].outerHTML });
 
     this.roll(actor, dataset, event);
   }
@@ -101,14 +107,15 @@ export class Trued6Roll {
     };
     let rollMode = game.settings.get("core", "rollMode");
     let isPrivate = false;
-    const rollResult = this.getRollResult(actor, data, roll, rollType);
+    let rollResult = this.getRollResult(actor, data, roll, rollType);
+    this.getRollFlavor(data, rollResult);
 
     if (["gmroll", "blindroll"].includes(rollMode)) {
       chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
       isPrivate = true;
     }
     const templateData = {
-      flavor: isPrivate ? "???" : this.getRollFlavor(data),
+      flavor: isPrivate ? "???" : rollResult.flavor,
       user: chatData.user,
       tooltip: isPrivate ? "" : await roll.getTooltip({ async: false }),
       total: isPrivate ? "?" : Math.round(roll.total * 100) / 100,

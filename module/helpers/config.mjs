@@ -6,20 +6,11 @@ export const TRUED6 = {};
  */
 TRUED6.debug = true;
 
-TRUED6.abilities = {
-  str: 'TRUED6.Ability.Str.long',
-  dex: 'TRUED6.Ability.Dex.long',
-  con: 'TRUED6.Ability.Con.long',
-  int: 'TRUED6.Ability.Int.long',
-  wis: 'TRUED6.Ability.Wis.long',
-  cha: 'TRUED6.Ability.Cha.long',
-};
-
-TRUED6.abilityAbbreviations = {
-  str: 'TRUED6.Ability.Str.abbr',
-  dex: 'TRUED6.Ability.Dex.abbr',
-  con: 'TRUED6.Ability.Con.abbr',
-  int: 'TRUED6.Ability.Int.abbr',
-  wis: 'TRUED6.Ability.Wis.abbr',
-  cha: 'TRUED6.Ability.Cha.abbr',
+TRUED6.attributes = {
+  str: 'TRUED6.Attributes.Str',
+  dex: 'TRUED6.Attributes.Dex',
+  con: 'TRUED6.Attributes.Con',
+  int: 'TRUED6.Attributes.Int',
+  wis: 'TRUED6.Attributes.Wis',
+  cha: 'TRUED6.Attributes.Cha',
 };

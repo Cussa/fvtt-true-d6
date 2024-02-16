@@ -42,16 +42,16 @@ export class Trued6Actor extends Actor {
    * Prepare Character type specific data
    */
   _prepareCharacterData(actorData) {
-    if (actorData.type !== 'character') return;
+    if (actorData.type !== 'player') return;
 
-    // Make modifications to data here. For example:
-    const systemData = actorData.system;
+    // // Make modifications to data here. For example:
+    // const systemData = actorData.system;
 
-    // Loop through ability scores, and add their modifiers to our sheet output.
-    for (let [key, ability] of Object.entries(systemData.abilities)) {
-      // Calculate the modifier using d20 rules.
-      ability.mod = Math.floor((ability.value - 10) / 2);
-    }
+    // // Loop through ability scores, and add their modifiers to our sheet output.
+    // for (let [key, ability] of Object.entries(systemData.attributes)) {
+    //   // Calculate the modifier using d20 rules.
+    //   ability.mod = Math.floor((ability.value - 10) / 2);
+    // }
   }
 
   /**
@@ -83,12 +83,12 @@ export class Trued6Actor extends Actor {
    * Prepare character roll data.
    */
   _getCharacterRollData(data) {
-    if (this.type !== 'character') return;
+    if (this.type !== 'player') return;
 
     // Copy the ability scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.
-    if (data.abilities) {
-      for (let [k, v] of Object.entries(data.abilities)) {
+    if (data.attributes) {
+      for (let [k, v] of Object.entries(data.attributes)) {
         data[k] = foundry.utils.deepClone(v);
       }
     }

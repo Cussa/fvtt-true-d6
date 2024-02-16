@@ -2,7 +2,17 @@
   font-family: $font-primary;
 }
 
-form.npc{
+%profile-img {
+  width: 120px;
+  height: auto;
+  border: 2px solid $c-black;
+  border-radius: 10px;
+  flex: 0;
+  margin: 0 10px 0 0;
+}
+
+form.npc,
+form.player {
   min-width: 580px;
 }
 
@@ -19,12 +29,7 @@ form.npc{
   }
 
   .profile-img {
-    width: 120px;
-    height: auto;
-    border: 2px solid $c-black;
-    border-radius: 10px;
-    flex: 0;
-    margin: 0 10px 0 0;
+    @extend %profile-img;
   }
 }
 
@@ -86,8 +91,8 @@ form.npc{
 
   .list-item {
     @extend .input;
+    @extend .padding2by5;
     display: flex;
-    padding: 2px 5px;
 
     label {
       flex: 5;
@@ -98,8 +103,11 @@ form.npc{
     @extend .input;
     padding: 5px;
     justify-content: center;
-
   }
+}
+
+.padding2by5 {
+  padding: 2px 5px;
 }
 
 .sheet-tabs {
@@ -137,6 +145,9 @@ form.npc{
 
 .big1 {
   font-size: 1em;
+}
+.big1-5 {
+  font-size: 1.5em;
 }
 
 .big2 {

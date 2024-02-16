@@ -24,7 +24,20 @@ button,
   margin: 10px 0;
   padding: 0;
 }
-
+.grid > *,
+.grid-2col > * {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.grid.no-margin,
+.grid-2col.no-margin {
+  margin: 0;
+}
+.grid.no-margin > *,
+.grid-2col.no-margin > * {
+  padding: 10px 0;
+}
 .grid-3col {
   grid-column: span 3/span 3;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -218,7 +231,16 @@ button,
 .trued6 .item-form {
   font-family: "Roboto", sans-serif;
 }
-.trued6 form.npc {
+.trued6 .sheet-header .profile-img {
+  width: 120px;
+  height: auto;
+  border: 2px solid #000;
+  border-radius: 10px;
+  flex: 0;
+  margin: 0 10px 0 0;
+}
+.trued6 form.npc,
+.trued6 form.player {
   min-width: 580px;
 }
 .trued6 .sheet-header {
@@ -229,14 +251,6 @@ button,
 }
 .trued6 .sheet-header .header-fields {
   flex: 1;
-}
-.trued6 .sheet-header .profile-img {
-  width: 120px;
-  height: auto;
-  border: 2px solid #000;
-  border-radius: 10px;
-  flex: 0;
-  margin: 0 10px 0 0;
 }
 .trued6 .border {
   display: grid;
@@ -255,7 +269,8 @@ button,
   background: #c0c0c0;
   border-radius: 0;
 }
-.trued6 .border .label.top-left {
+.trued6 .border .label.top-left, .trued6 .border .label.grid:first-child,
+.trued6 .border .label.grid-2col:first-child {
   border-top-left-radius: 10px;
 }
 .trued6 .border .label.top-right {
@@ -282,7 +297,6 @@ button,
 }
 .trued6 .border .list-item {
   display: flex;
-  padding: 2px 5px;
 }
 .trued6 .border .list-item label {
   flex: 5;
@@ -290,6 +304,9 @@ button,
 .trued6 .border .list-button {
   padding: 5px;
   justify-content: center;
+}
+.trued6 .padding2by5, .trued6 .border .list-item {
+  padding: 2px 5px;
 }
 .trued6 .sheet-tabs {
   flex: 0;
@@ -317,6 +334,9 @@ button,
 }
 .trued6 .big1 {
   font-size: 1em;
+}
+.trued6 .big1-5 {
+  font-size: 1.5em;
 }
 .trued6 .big2, .trued6 .dice-roll .dice-total, .trued6 .dice-roll .dice-flavor {
   font-size: 2em;
@@ -470,6 +490,7 @@ button,
 .trued6 .dice-roll .dice-total {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  border: 0px;
 }
 .trued6 .dice-roll .dice-total.failure {
   color: red;

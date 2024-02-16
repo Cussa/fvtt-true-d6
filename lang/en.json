@@ -1,29 +1,41 @@
 {
   "TRUED6": {
-    "Ability": {
+    "Attributes": {
       "Str": {
         "long": "Strength",
-        "abbr": "str"
-      },
-      "Con": {
-        "long": "Constitution",
-        "abbr": "con"
+        "abbr": "str",
+        "explanation": "melee attacks, athletics, break, overwhelm, lift, push",
+        "order": "1"
       },
       "Dex": {
         "long": "Dexterity",
-        "abbr": "dex"
+        "abbr": "dex",
+        "explanation": "ranged attacks, acrobatics, coordination, handiness",
+        "order": "3"
+      },
+      "Con": {
+        "long": "Constitution",
+        "abbr": "con",
+        "explanation": "resistance, metabolism, endurance, stamina, health",
+        "order": "2"
       },
       "Int": {
         "long": "Intelligence",
-        "abbr": "int"
+        "abbr": "int",
+        "explanation": "arcane magic, logic, education, investigation, tracking",
+        "order": "5"
       },
       "Wis": {
         "long": "Wisdom",
-        "abbr": "wis"
+        "abbr": "wis",
+        "explanation": "divine magic, religion, empathy, intuition, discernment",
+        "order": "6"
       },
       "Cha": {
         "long": "Charisma",
-        "abbr": "cha"
+        "abbr": "cha",
+        "explanation": "ascendant, elocution, arts, passion, nerve, leadership",
+        "order": "4"
       }
     },
     "SheetLabels": {
@@ -60,6 +72,7 @@
     "Features": "Features",
     "DiceRoll": {
       "Attack": "Attack",
+      "Attribute": "Attribute",
       "Success": "Success",
       "CriticalSuccess": "Critical Success",
       "Failure": "Failure",
@@ -67,11 +80,17 @@
       "Reroll": "Reroll",
       "DiscardedByAdvantage": "Discarded by Advantage",
       "DiscardedByDisadvantage": "Discarded by Disadvantage"
+    },
+    "Player": {
+      "Class": "Classes/levels",
+      "Level": "Total Level",
+      "Race": "Race/bonus",
+      "Coins": "Coins"
     }
   },
   "TYPES": {
     "Actor": {
-      "character": "Character",
+      "player": "Player",
       "npc": "NPC"
     },
     "Item": {

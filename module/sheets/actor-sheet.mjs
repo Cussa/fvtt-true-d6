@@ -14,13 +14,13 @@ export class Trued6ActorSheet extends ActorSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['trued6', 'sheet', 'actor'],
       template: 'systems/trued6/templates/actor/actor-sheet.hbs',
-      width: 600,
-      height: 600,
+      width: 650,
+      height: 650,
       tabs: [
         {
           navSelector: '.sheet-tabs',
           contentSelector: '.sheet-body',
-          initial: 'features',
+          initial: 'attributes',
         },
       ],
     });
@@ -49,7 +49,7 @@ export class Trued6ActorSheet extends ActorSheet {
     context.flags = actorData.flags;
 
     // Prepare character data and items.
-    if (actorData.type == 'character') {
+    if (actorData.type == 'player') {
       this._prepareItems(context);
       this._prepareCharacterData(context);
     }
@@ -82,9 +82,21 @@ export class Trued6ActorSheet extends ActorSheet {
    */
   _prepareCharacterData(context) {
     // Handle ability scores.
-    for (let [k, v] of Object.entries(context.system.abilities)) {
-      v.label = game.i18n.localize(CONFIG.TRUED6.abilities[k]) ?? k;
+    let attributesArray = [];
+
+    var attributesLength = Object.keys(CONFIG.TRUED6.attributes).length;
+
+    for (let [k, v] of Object.entries(context.system.attributes)) {
+      const key = CONFIG.TRUED6.attributes[k];
+      v.abbr = game.i18n.localize(`${key}.abbr`).toUpperCase() ?? k;
+      v.label = game.i18n.localize(`${key}.long`).toUpperCase() ?? k;
+      v.explanation = game.i18n.localize(`${key}.explanation`) ?? k;
+      v.key = k;
+      const order = parseInt(game.i18n.localize(`${key}.order`));
+      v.cssClass = order == 1 ? "top-left" : (order < attributesLength ? "" : "bottom-left");
+      attributesArray[order] = v;
     }
+    context.attributes = attributesArray;
   }
 
   /**
@@ -184,7 +196,7 @@ export class Trued6ActorSheet extends ActorSheet {
       onManageActiveEffect(ev, document);
     });
 
-    // Rollable abilities.
+    // Rollable attributes.
     html.on('click', '.rollable', this._onRoll.bind(this));
 
     // Drag events for macros.
@@ -238,25 +250,25 @@ export class Trued6ActorSheet extends ActorSheet {
 
     return Trued6Roll.roll(actor, dataset, event);
 
-    // Handle item rolls.
-    if (dataset.rollType) {
-      if (dataset.rollType == 'item') {
-        const itemId = element.closest('.item').dataset.itemId;
-        const item = this.actor.items.get(itemId);
-        if (item) return item.roll();
-      }
-    }
+    // // Handle item rolls.
+    // if (dataset.rollType) {
+    //   if (dataset.rollType == 'item') {
+    //     const itemId = element.closest('.item').dataset.itemId;
+    //     const item = this.actor.items.get(itemId);
+    //     if (item) return item.roll();
+    //   }
+    // }
 
-    // Handle rolls that supply the formula directly.
-    if (dataset.roll) {
-      let label = dataset.label ? `[ability] ${dataset.label}` : '';
-      let roll = new Roll(dataset.roll, this.actor.getRollData());
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: label,
-        rollMode: game.settings.get('core', 'rollMode'),
-      });
-      return roll;
-    }
+    // // Handle rolls that supply the formula directly.
+    // if (dataset.roll) {
+    //   let label = dataset.label ? `[ability] ${dataset.label}` : '';
+    //   let roll = new Roll(dataset.roll, this.actor.getRollData());
+    //   roll.toMessage({
+    //     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    //     flavor: label,
+    //     rollMode: game.settings.get('core', 'rollMode'),
+    //   });
+    //   return roll;
+    // }
   }
 }

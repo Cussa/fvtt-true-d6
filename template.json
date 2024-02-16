@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc"],
+    "types": ["player", "npc"],
     "templates": {
       "base": {
         "health": {
@@ -10,33 +10,32 @@
         }
       }
     },
-    "character": {
+    "player": {
       "templates": ["base"],
       "attributes": {
-        "level": {
+        "str": {
+          "value": 1
+        },
+        "dex": {
+          "value": 1
+        },
+        "con": {
+          "value": 1
+        },
+        "int": {
+          "value": 1
+        },
+        "wis": {
+          "value": 1
+        },
+        "cha": {
           "value": 1
         }
       },
-      "abilities": {
-        "str": {
-          "value": 10
-        },
-        "dex": {
-          "value": 10
-        },
-        "con": {
-          "value": 10
-        },
-        "int": {
-          "value": 10
-        },
-        "wis": {
-          "value": 10
-        },
-        "cha": {
-          "value": 10
-        }
-      }
+      "classes": "",
+      "level": 1,
+      "race": "",
+      "coins": 100
     },
     "npc": {
       "templates": ["base"],

@@ -30,8 +30,7 @@ Hooks.once('init', function () {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: '1d20 + @abilities.dex.mod',
-    decimals: 2,
+    formula: '1d6cs<=@attributes.dex.value'
   };
 
   // Define custom Document classes
@@ -63,10 +62,10 @@ Hooks.once('init', function () {
 /*  Handlebars Helpers                          */
 /* -------------------------------------------- */
 
-// If you need to add Handlebars helpers, here is a useful example:
-Handlebars.registerHelper('toLowerCase', function (str) {
-  return str.toLowerCase();
-});
+// // If you need to add Handlebars helpers, here is a useful example:
+// Handlebars.registerHelper('toLowerCase', function (str) {
+//   return str.toLowerCase();
+// });
 
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
