@@ -316,13 +316,13 @@ export class Trued6ActorSheet extends ActorSheet {
 
     var buttonKeys = Object.keys(buttons);
     if (buttonKeys.length == 0) {
-      ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
+      await this._notifyRest(false);
       return;
     }
 
     if (buttonKeys.length == 1) {
       await this.actor.items.get(buttonKeys[0]).refreshUsage();
-      ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
+      await this._notifyRest(false);
       return;
     }
 
@@ -334,7 +334,8 @@ export class Trued6ActorSheet extends ActorSheet {
 
     if (dialogOutput)
       await this.actor.items.get(dialogOutput).refreshUsage();
-    ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
+    
+    await this._notifyRest(false);
   }
 
   async _onLongRest(event) {
@@ -354,7 +355,12 @@ export class Trued6ActorSheet extends ActorSheet {
       await i.refreshUsage();
     }
 
-    ui.notifications.info(game.i18n.localize("TRUED6.LongRest"));
+    await this._notifyRest(true);
+  }
+
+  async _notifyRest(long) {
+    const key = `TRUED6.${long ? "Long" : "Short"}Rest`;
+    ui.notifications.info(`${this.actor.name}: ${game.i18n.localize(key)}`);
   }
 
   async _onItemUse(event) {
