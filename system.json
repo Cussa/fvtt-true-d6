@@ -18,8 +18,8 @@
   "media": [
     {
       "type": "setup",
-      "url": "systems/trued6/assets/anvil-impact.png",
-      "thumbnail": "systems/trued6/assets/anvil-impact.png"
+      "url": "systems/trued6/assets/banner-white.png",
+      "thumbnail": "systems/trued6/assets/banner-white.png"
     }
   ],
   "version": "0.0.1",
@@ -41,7 +41,7 @@
   "socket": false,
   "manifest": "https://github.com/cussa/fvtt-true-d6/releases/download/latest/module.json",
   "download": "https://github.com/cussa/fvtt-true-d6/releases/download/latest/module.zip",
-  "background": "systems/trued6/assets/anvil-impact.png",
+  "background": "systems/trued6/assets/banner-white.png",
   "gridDistance": 1,
   "gridUnits": "m",
   "primaryTokenAttribute": "health",
