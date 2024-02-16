@@ -195,3 +195,7 @@ form.player {
   //   overflow-y: auto;
   // }
 }
+
+.usable {
+  @extend .rollable;
+}

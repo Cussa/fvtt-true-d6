@@ -215,7 +215,7 @@ export class Trued6Roll {
     }
     if (rollStyle == this.RollStyles.Normal && data.itemId) {
       let item = actor.items.get(data.itemId);
-      item.updateUsage(roll);
+      await item.updateUsage(roll);
     }
     return finalRoll;
   }

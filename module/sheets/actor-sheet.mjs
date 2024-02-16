@@ -160,6 +160,7 @@ export class Trued6ActorSheet extends ActorSheet {
       else if (i.type == "skill") {
         i.isUsed = i.system.whenRestUsed || i.system.whenFailedUsed;
         i.rollable = i.system.attribute && !i.isUsed;
+        i.usable = !i.system.attribute && !i.isUsed && i.system.usageType != "none";
 
         i.isUsedInfo = game.i18n.localize(i.isUsed ? "Yes" : "No");
         i.rollType = i.system.isSpell ? "spell" : "skill";
@@ -203,6 +204,7 @@ export class Trued6ActorSheet extends ActorSheet {
     html.on('click', '.item-create', this._onItemCreate.bind(this));
     html.on('click', '.short-rest-button', this._onShortRest.bind(this));
     html.on('click', '.long-rest-button', this._onLongRest.bind(this));
+    html.on('click', '.usable', this._onItemUse.bind(this));
 
     // Delete Inventory Item
     html.on('click', '.item-delete', (ev) => {
@@ -275,27 +277,6 @@ export class Trued6ActorSheet extends ActorSheet {
     const actor = this.actor;
 
     return Trued6Roll.roll(actor, dataset, event);
-
-    // // Handle item rolls.
-    // if (dataset.rollType) {
-    //   if (dataset.rollType == 'item') {
-    //     const itemId = element.closest('.item').dataset.itemId;
-    //     const item = this.actor.items.get(itemId);
-    //     if (item) return item.roll();
-    //   }
-    // }
-
-    // // Handle rolls that supply the formula directly.
-    // if (dataset.roll) {
-    //   let label = dataset.label ? `[ability] ${dataset.label}` : '';
-    //   let roll = new Roll(dataset.roll, this.actor.getRollData());
-    //   roll.toMessage({
-    //     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-    //     flavor: label,
-    //     rollMode: game.settings.get('core', 'rollMode'),
-    //   });
-    //   return roll;
-    // }
   }
 
   async _onShortRest(event) {
@@ -314,8 +295,6 @@ export class Trued6ActorSheet extends ActorSheet {
         callback: () => (i._id)
       };
     }
-
-
 
     var buttonKeys = Object.keys(buttons);
     if (buttonKeys.length == 0) {
@@ -359,5 +338,13 @@ export class Trued6ActorSheet extends ActorSheet {
     }
 
     ui.notifications.info(game.i18n.localize("TRUED6.LongRest"));
+  }
+
+  async _onItemUse(event){
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+    const item = this.actor.items.get(dataset.itemId);
+    await item.updateUsage(null);
   }
 }

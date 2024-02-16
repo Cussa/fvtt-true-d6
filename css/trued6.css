@@ -9,7 +9,7 @@ button,
   font-size: 16px;
 }
 
-.rollable:hover, .rollable:focus {
+.rollable:hover, .trued6 .usable:hover, .rollable:focus, .trued6 .usable:focus {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer;

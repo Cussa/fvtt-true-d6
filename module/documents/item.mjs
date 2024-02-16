@@ -12,66 +12,7 @@ export class Trued6Item extends Item {
     super.prepareData();
   }
 
-  /**
-   * Prepare a data object which defines the data schema used by dice roll commands against this Item
-   * @override
-   */
-  getRollData() {
-    // Starts off by populating the roll data with `this.system`
-    const rollData = { ...super.getRollData() };
-
-    // Quit early if there's no parent actor
-    if (!this.actor) return rollData;
-
-    // If present, add the actor's roll data
-    rollData.actor = this.actor.getRollData();
-
-    return rollData;
-  }
-
-  /**
-   * Handle clickable rolls.
-   * @param {Event} event   The originating click event
-   * @private
-   */
-  async roll() {
-    const item = this;
-
-    // Initialize chat data.
-    const speaker = ChatMessage.getSpeaker({ actor: this.actor });
-    const rollMode = game.settings.get('core', 'rollMode');
-    const label = `[${item.type}] ${item.name}`;
-
-    console.log(this);
-
-    // If there's no roll data, send a chat message.
-    if (!this.system.formula) {
-      ChatMessage.create({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-        content: item.system.description ?? '',
-      });
-    }
-    // Otherwise, create a roll and send a chat message from it.
-    else {
-      // Retrieve roll data.
-      const rollData = this.getRollData();
-
-      // Invoke the roll and submit it to chat.
-      const roll = new Roll(rollData.formula, rollData);
-      // If you need to store the value first, uncomment the next line.
-      // const result = await roll.evaluate();
-      roll.toMessage({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-      });
-      return roll;
-    }
-  }
-
-  updateUsage(roll) {
+  async updateUsage(roll) {
     console.log(roll, this);
     if (!["skill", "spell"].includes(this.type) || this.system.usageType == "none")
       return;
@@ -81,7 +22,7 @@ export class Trued6Item extends Item {
       return;
     }
 
-    if (this.system.usageType == "fail" && roll.total == 0) {
+    if (this.system.usageType == "fail" && roll?.total == 0) {
       this.update({ "system.whenFailedUsed": true });
       return;
     }
