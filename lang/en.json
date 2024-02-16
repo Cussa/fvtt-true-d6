@@ -5,6 +5,10 @@
     "Features": "Features",
     "none": "None",
     "Characteristics": "Characteristics",
+    "Rest": "Rest",
+    "LongRest": "Long Rest",
+    "ShortRest": "Short Rest",
+    "RecoverSkill": "Recover Skill",
     "Attributes": {
       "Str": {
         "long": "Strength",

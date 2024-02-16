@@ -14,8 +14,8 @@ export class Trued6ActorSheet extends ActorSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['trued6', 'sheet', 'actor'],
       template: 'systems/trued6/templates/actor/actor-sheet.hbs',
-      width: 650,
-      height: 650,
+      width: 675,
+      height: 675,
       tabs: [
         {
           navSelector: '.sheet-tabs',
@@ -161,7 +161,7 @@ export class Trued6ActorSheet extends ActorSheet {
         i.isUsed = i.system.whenRestUsed || i.system.whenFailedUsed;
         if (i.system.attribute)
           i.cssClass = i.isUsed ? null : "rollable";
-        
+
         i.isUsedInfo = game.i18n.localize(i.isUsed ? "Yes" : "No");
         i.rollType = i.system.isSpell ? "spell" : "skill";
         skills.push(i);
@@ -202,6 +202,8 @@ export class Trued6ActorSheet extends ActorSheet {
 
     // Add Inventory Item
     html.on('click', '.item-create', this._onItemCreate.bind(this));
+    html.on('click', '.short-rest-button', this._onShortRest.bind(this));
+    html.on('click', '.long-rest-button', this._onLongRest.bind(this));
 
     // Delete Inventory Item
     html.on('click', '.item-delete', (ev) => {
@@ -295,5 +297,68 @@ export class Trued6ActorSheet extends ActorSheet {
     //   });
     //   return roll;
     // }
+  }
+
+  async _onShortRest(event) {
+    event.preventDefault();
+
+    var newHealth = Math.min(this.actor.system.health.current + 1, this.actor.system.health.max);
+    await this.actor.update({ "system.health.current": newHealth });
+
+    var buttons = {};
+
+    for (let i of this.actor.items) {
+      if (i.type != "skill" || (!i.system.whenRestUsed && !i.system.whenFailedUsed))
+        continue;
+      buttons[i._id] = {
+        label: i.name,
+        callback: () => (i._id)
+      };
+    }
+
+
+
+    var buttonKeys = Object.keys(buttons);
+    if (buttonKeys.length == 0) {
+      ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
+      return;
+    }
+
+    if (buttonKeys.length == 1) {
+      await this.actor.items.get(buttonKeys[0]).update({ "system.whenRestUsed": false, "system.whenFailedUsed": false });
+      ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
+      return;
+    }
+
+    const dialogOutput = await Dialog.wait({
+      title: game.i18n.localize("TRUED6.RecoverSkill"),
+      buttons: buttons,
+      close: () => { return false; }
+    });
+
+    await this.actor.items.get(dialogOutput).update({ "system.whenRestUsed": false, "system.whenFailedUsed": false });
+    ui.notifications.info(game.i18n.localize("TRUED6.ShortRest"));
+  }
+
+  async _onLongRest(event) {
+    event.preventDefault();
+
+    const data = {
+      formula: "1d6",
+      label: game.i18n.localize("TRUED6.LongRest"),
+      rollType: "rest"
+    };
+    const roll = await Trued6Roll.roll(this.actor, data, {});
+
+    var newHealth = Math.min(this.actor.system.health.value + roll.total, this.actor.system.health.max);
+    await this.actor.update({ "system.health.current": newHealth });
+
+    for (let i of this.actor.items) {
+      if (i.type != "skill")
+        continue;
+      await i.update({ "system.whenRestUsed": false, "system.whenFailedUsed": false });
+    }
+
+    ui.notifications.info(game.i18n.localize("TRUED6.LongRest"));
   }
 }

@@ -22,12 +22,12 @@ export class Trued6Roll {
       return this.RollStyles.Advantage;
     if (rollData.forceDisadvantage) {
       if ((data.attribute && rollData.forceDisadvantage[data.attribute?.toLowerCase()])
-        || data.rollData.forceDisadvantage[data.rollType.toLowerCase()])
+        || data.rollData?.forceDisadvantage[data.rollType.toLowerCase()])
         return this.RollStyles.Disadvantage;
     }
     if (rollData.forceAdvantage) {
       if ((data.attribute && rollData.forceAdvantage[data.attribute?.toLowerCase()])
-        || data.rollData.forceAdvantage[data.rollType.toLowerCase()])
+        || data.rollData?.forceAdvantage[data.rollType.toLowerCase()])
         return this.RollStyles.Advantage;
     }
     return this.RollStyles.Normal;
@@ -104,10 +104,14 @@ export class Trued6Roll {
       text = game.i18n.localize("TRUED6.Skill.Spell");
       this.changeDamageKeyIfIsAttack(result);
     }
+    else if (data.rollType == "rest") {
+      text = game.i18n.localize("TRUED6.Rest");
+      this.changeDamageKeyIfIsAttack(result);
+    }
     result.flavor = `${text}<br>${data.label.toUpperCase()}`;
   }
 
-  static changeDamageKeyIfIsAttack(result){
+  static changeDamageKeyIfIsAttack(result) {
     if (!result.isAttack) {
       result.damageKey = "TRUED6.Skill.RollResult";
     }
@@ -118,7 +122,7 @@ export class Trued6Roll {
       result.damage = null;
   }
 
-  static rollFromChat(event) {
+  static async rollFromChat(event) {
     event.preventDefault();
     const element = event.currentTarget;
 
@@ -133,23 +137,23 @@ export class Trued6Roll {
 
     message.update({ content: newContent[0].outerHTML });
 
-    this.roll(actor, data, event);
+    await this.roll(actor, data, event);
   }
 
-  static roll(actor, data, event) {
+  static async roll(actor, data, event) {
     const actorRollData = actor.getRollData();
     const rollStyle = this.getRollStyle(event, data, actorRollData);
-    if (!data.target && data.attribute)
+    if (!data.target && !data.attribute)
       data.target = actorRollData[data.attribute.toLowerCase()].value;
-    const rollFormula = `1d6cs<=${data.target}`;
+    const rollFormula = data.formula ?? `1d6cs<=${data.target}`;
 
-    let attackRoll = this.createRoll(rollFormula, actorRollData);
-    this.sendRollToChat(attackRoll, actor, data, rollStyle);
+    let attackRoll = await this.createRoll(rollFormula, actorRollData);
+    return await this.sendRollToChat(attackRoll, actor, data, rollStyle);
   }
 
-  static createRoll(rollFormula) {
+  static async createRoll(rollFormula) {
     let attackRoll = new Roll(rollFormula);
-    attackRoll.evaluate({ async: false });
+    await attackRoll.evaluate();
     return attackRoll;
   }
 
@@ -186,28 +190,31 @@ export class Trued6Roll {
     chatData = foundry.utils.mergeObject({
       flags: { trued6: { data: data } }
     }, chatData);
-    renderTemplate(this.RollTemplate, templateData).then(content => {
-      chatData.content = content;
-      chatData.rolls = [roll];
-      if (game.dice3d) {
-        game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind)
-          .then(_ => this.finalizeRoll(chatData, actor, roll, data, rollStyle));
-      } else {
-        chatData.sound = CONFIG.sounds.dice;
-        this.finalizeRoll(chatData, actor, roll, data, rollStyle);
-      }
-    });
+    let finalRoll = roll;
+    let content = await renderTemplate(this.RollTemplate, templateData);
+    chatData.content = content;
+    chatData.rolls = [roll];
+    if (game.dice3d) {
+      await game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind)
+      finalRoll = await this.finalizeRoll(chatData, actor, roll, data, rollStyle);
+    } else {
+      chatData.sound = CONFIG.sounds.dice;
+      finalRoll = await this.finalizeRoll(chatData, actor, roll, data, rollStyle);
+    }
+    return finalRoll;
   }
 
-  static finalizeRoll(chatData, actor, roll, data, rollStyle) {
-    ChatMessage.create(chatData);
+  static async finalizeRoll(chatData, actor, roll, data, rollStyle) {
+    await ChatMessage.create(chatData);
+    let finalRoll = roll;
     if (rollStyle == this.RollStyles.Disadvantage && roll.total > 0) {
-      const attackRoll = this.createRoll(roll.formula);
-      this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal);
+      const attackRoll = await this.createRoll(roll.formula);
+      finalRoll = await this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal);
     }
-    if (rollStyle == this.RollStyles.Normal && data.itemId){
+    if (rollStyle == this.RollStyles.Normal && data.itemId) {
       let item = actor.items.get(data.itemId);
       item.updateUsage(roll);
     }
+    return finalRoll;
   }
 }
