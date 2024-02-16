@@ -224,8 +224,8 @@ export class Trued6Roll {
       finalRoll = await this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal, actorRollData);
     }
     if (data.itemId &&
-      (rollStyle == this.RollStyles.Disadvantage && roll.total == 0) ||
-      rollStyle == this.RollStyles.Normal) {
+      ((rollStyle == this.RollStyles.Disadvantage && roll.total == 0) ||
+      rollStyle == this.RollStyles.Normal)) {
       let item = actor.items.get(data.itemId);
       await item.updateUsage(roll);
     }
