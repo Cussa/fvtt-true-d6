@@ -60,8 +60,7 @@
       }
     },
     "item": {
-      "templates": ["base"],
-      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+      "templates": ["base"]
     },
     "feature": {
       "templates": ["base"]
