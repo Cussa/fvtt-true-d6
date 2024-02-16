@@ -89,8 +89,8 @@ export class Trued6ActorSheet extends ActorSheet {
 
     for (let [k, v] of Object.entries(context.system.attributes)) {
       const key = CONFIG.TRUED6.attributes[k];
-      v.abbr = game.i18n.localize(`${key}.abbr`).toUpperCase() ?? k;
-      v.label = game.i18n.localize(`${key}.long`).toUpperCase() ?? k;
+      v.abbr = (game.i18n.localize(`${key}.abbr`) ?? k).toUpperCase();
+      v.label = (game.i18n.localize(`${key}.long`) ?? k).toUpperCase();
       v.explanation = game.i18n.localize(`${key}.explanation`) ?? k;
       v.key = k;
       const order = parseInt(game.i18n.localize(`${key}.order`));
