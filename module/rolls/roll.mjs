@@ -14,7 +14,6 @@ export class Trued6Roll {
   };
 
   static getRollStyle(event, data, rollData) {
-    console.log(data, rollData);
     if (event.altKey ||
       isTrue(data.forceDisadvantage))
       return this.RollStyles.Disadvantage;
@@ -202,20 +201,19 @@ export class Trued6Roll {
     chatData.rolls = [roll];
     if (game.dice3d) {
       await game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind)
-      finalRoll = await this.finalizeRoll(chatData, actor, roll, data, rollStyle);
     } else {
       chatData.sound = CONFIG.sounds.dice;
-      finalRoll = await this.finalizeRoll(chatData, actor, roll, data, rollStyle);
     }
+    finalRoll = await this.finalizeRoll(chatData, actor, roll, data, rollStyle, actorRollData);
     return finalRoll;
   }
 
-  static async finalizeRoll(chatData, actor, roll, data, rollStyle) {
+  static async finalizeRoll(chatData, actor, roll, data, rollStyle, actorRollData) {
     await ChatMessage.create(chatData);
     let finalRoll = roll;
     if (rollStyle == this.RollStyles.Disadvantage && roll.total > 0) {
       const attackRoll = await this.createRoll(roll.formula);
-      finalRoll = await this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal);
+      finalRoll = await this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal, actorRollData);
     }
     if (rollStyle == this.RollStyles.Normal && data.itemId) {
       let item = actor.items.get(data.itemId);
