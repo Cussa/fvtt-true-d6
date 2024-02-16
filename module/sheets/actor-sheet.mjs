@@ -300,8 +300,8 @@ export class Trued6ActorSheet extends ActorSheet {
   async _onShortRest(event) {
     event.preventDefault();
 
-    var newHealth = Math.min(this.actor.system.health.current + 1, this.actor.system.health.max);
-    await this.actor.update({ "system.health.current": newHealth });
+    var newHealth = Math.min(this.actor.system.health.value + 1, this.actor.system.health.max);
+    await this.actor.update({ "system.health.value": newHealth });
 
     var buttons = {};
 
@@ -348,7 +348,7 @@ export class Trued6ActorSheet extends ActorSheet {
     const roll = await Trued6Roll.roll(this.actor, data, {});
 
     var newHealth = Math.min(this.actor.system.health.value + roll.total, this.actor.system.health.max);
-    await this.actor.update({ "system.health.current": newHealth });
+    await this.actor.update({ "system.health.value": newHealth });
 
     for (let i of this.actor.items) {
       await i.refreshUsage();
