@@ -28,11 +28,7 @@ export class Trued6Item extends Item {
     }
   }
 
-  static LabelFunctions = {
-    skill: "_getLabelSkill"
-  }
-
-  _getLabelGeneric(labels){
+  _getLabelGeneric(labels) {
     return labels.join(" - ");
   }
 
@@ -43,7 +39,7 @@ export class Trued6Item extends Item {
       labels.push(game.i18n.localize("TYPES.Item.spell"));
     if (this.system.isAttack)
       labels.push(game.i18n.localize("TRUED6.DiceRoll.Attack"));
-    
+
     labels.push(game.i18n.localize(`TRUED6.Skill.UsageType.${this.system.usageType}`));
 
     return labels.join(this.img ? "<br>" : " - ");
@@ -51,14 +47,13 @@ export class Trued6Item extends Item {
 
   async sendToChat(actor) {
     const templatePath = `systems/trued6/templates/chat/item.hbs`;
-
-    console.log(this.type, Trued6Item.LabelFunctions);
-
-    const func = Trued6Item.LabelFunctions[this.type] ?? "_getLabelGeneric";
+    let funcName = `_getLabel${this.type.capitalize()}`;
+    if (this[funcName] == undefined)
+      funcName = "_getLabelGeneric";
     let labels = [
       game.i18n.localize(`TYPES.Item.${this.type}`)
     ];
-    this.label = this[func](labels);
+    this.label = this[funcName](labels);
 
     let chatData = {
       user: game.user.id,
