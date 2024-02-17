@@ -25,6 +25,9 @@ jobs:
         download: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/system.zip
         flags: "{}"
 
+    - name: Disable debug
+      run: sed -i 's/TRUED6\.debug = true;/TRUED6.debug = false;/g' "module/helpers/config.mjs"
+
     # Create a zip file with all files required by the system to add to the release
     - run: zip -r ${{ env.package_type }}.zip LICENSE README.md system.json template.json assets/ css/ lang/ lib/ module/ packs/ templates/
 
