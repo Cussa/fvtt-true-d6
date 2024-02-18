@@ -58,7 +58,7 @@ export class Trued6Item extends Item {
     if (this.system.attribute)
       labels.push(game.i18n.localize(`TRUED6.Attributes.${this.system.attribute}.long`));
     if (this.system.isSpell)
-      labels.push(game.i18n.localize("TYPES.Item.spell"));
+      labels.push(game.i18n.localize("TRUED6.Skill.Spell"));
     if (this.system.isAttack)
       labels.push(game.i18n.localize("TRUED6.DiceRoll.Attack"));
 
