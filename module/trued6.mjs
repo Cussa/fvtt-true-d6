@@ -9,6 +9,11 @@ import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { TRUED6 } from './helpers/config.mjs';
 import { Trued6Roll } from './rolls/roll.mjs';
 import { RollStyleCssHandler } from './helpers/rollStyleCssHandler.mjs';
+import { Trued6Cae } from './helpers/customActiveEffectHandler.mjs';
+
+globalThis.trued6 = {
+  Trued6Cae: Trued6Cae
+};
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -25,6 +30,7 @@ Hooks.once('init', function () {
 
   // Add custom constants for configuration.
   CONFIG.TRUED6 = TRUED6;
+  CONFIG.TRUED6.CAE = new Trued6Cae();
 
   /**
    * Set an initiative formula for the system
@@ -83,7 +89,7 @@ Hooks.once('ready', function () {
 });
 
 Hooks.on('renderChatLog', (app, html, _data) => {
-  html.on('click', '.chat-reroll', (event) =>  Trued6Roll.rollFromChat(event));
+  html.on('click', '.chat-reroll', (event) => Trued6Roll.rollFromChat(event));
 });
 
 /* -------------------------------------------- */
