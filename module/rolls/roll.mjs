@@ -61,10 +61,11 @@ export class Trued6Roll {
     if (actor.type == "npc")
       return result;
 
-    if (result.resultValue == data.target && result.isAttack) {
-      result.resultValue++;
+    if (result.resultValue == data.target) {
+      if (result.isAttack)
+        result.resultValue++;
+
       result.textKey = "TRUED6.DiceRoll.CriticalSuccess";
-      result.critical = true;
     }
 
     if (data.dmgBonus)
