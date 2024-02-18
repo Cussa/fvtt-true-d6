@@ -44,18 +44,21 @@ export class Trued6Actor extends Actor {
   _prepareCharacterData(actorData) {
     if (actorData.type !== 'player') return;
 
-    const defenseStats = {
-      armour: {
+    const defenseStats = foundry.utils.mergeObject(
+      {
+        armour: {
+          value: 0,
+          name: null
+        },
+        shield: {
+          value: 0,
+          name: null
+        },
         value: 0,
-        name: null
+        label: ""
       },
-      shield: {
-        value: 0,
-        name: null
-      },
-      value: 0,
-      label: ""
-    };
+      actorData.system.defenseStats
+    );
 
     for (let i of actorData.items.filter(it => it.type == "equipment")) {
       if (i.system.type == "Weapon" || !i.system.equipped)

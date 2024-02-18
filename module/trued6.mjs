@@ -32,6 +32,8 @@ Hooks.once('init', function () {
   CONFIG.TRUED6 = TRUED6;
   CONFIG.TRUED6.CAE = new Trued6Cae();
 
+  CONFIG.TRUED6.CAE.registerHook();
+
   /**
    * Set an initiative formula for the system
    * @type {String}

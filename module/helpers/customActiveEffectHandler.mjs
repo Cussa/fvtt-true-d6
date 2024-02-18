@@ -1,5 +1,5 @@
 export class Trued6Cae {
-  constructor() {
+  registerHook() {
     Hooks.on('applyActiveEffect', (actor, change, _current, _delta, _changes) => this.customActiveEffectHandler(actor, change));
   }
 
@@ -9,10 +9,10 @@ export class Trued6Cae {
       console.error(`Custom Active Effect called "${change.value}" not found.`, actor, change);
       return;
     }
-    fn(actor, change.key);
+    fn(actor, change);
   }
 
-  effect1(actor, _key) {
+  effect1(actor, _) {
     let maxHealth = Math.max(actor.system.health.max, 10);
     foundry.utils.setProperty(actor, "system.health.max", maxHealth);
   }
