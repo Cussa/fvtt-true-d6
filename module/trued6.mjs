@@ -75,7 +75,7 @@ Hooks.once('ready', function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on('hotbarDrop', (bar, data, slot) => createItemMacro(data, slot));
 
-  if (CONFIG.TRUED6.debug)
+  if (CONFIG.TRUED6.debug && game.actors.contents.length > 0)
     game.actors.contents[0].sheet.render(true);
 });
 
