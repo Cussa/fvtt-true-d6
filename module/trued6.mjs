@@ -8,6 +8,7 @@ import { Trued6ItemSheet } from './sheets/item-sheet.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { TRUED6 } from './helpers/config.mjs';
 import { Trued6Roll } from './rolls/roll.mjs';
+import { RollStyleCssHandler } from './helpers/rollStyleCssHandler.mjs';
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -74,6 +75,8 @@ Hooks.once('init', function () {
 Hooks.once('ready', function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on('hotbarDrop', (bar, data, slot) => createItemMacro(data, slot));
+
+  new RollStyleCssHandler().registerHandler();
 
   if (CONFIG.TRUED6.debug && game.actors.contents.length > 0)
     game.actors.contents[0].sheet.render(true);

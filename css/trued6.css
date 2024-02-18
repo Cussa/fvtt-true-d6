@@ -11,8 +11,14 @@ button,
 
 .rollable:hover, .trued6 .usable:hover, .rollable:focus, .trued6 .usable:focus {
   color: #000;
-  text-shadow: 0 0 10px red;
+  text-shadow: 0 0 10px blue;
   cursor: pointer;
+}
+.rollable:hover.advantage, .trued6 .usable:hover.advantage, .rollable:focus.advantage, .trued6 .usable:focus.advantage {
+  text-shadow: 0 0 10px green;
+}
+.rollable:hover.disadvantage, .trued6 .usable:hover.disadvantage, .rollable:focus.disadvantage, .trued6 .usable:focus.disadvantage {
+  text-shadow: 0 0 10px red;
 }
 
 .grid,
