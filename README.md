@@ -5,7 +5,7 @@
 
 An **OFFICIAL** Foundry implementation for the TRUE-d6 System!
 
-![TRUE-d6](assets/banner-white.png)
+![TRUE-d6](assets/banner.png)
 
 Tabletop Roleplaying Universal Engine d6, or TRUE-d6, is a flexible and minimal TTRPG. Its core system is designed for fantasy settings, but it can be adapted to anything.
 
