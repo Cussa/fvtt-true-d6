@@ -24,10 +24,13 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 
 ## Examples
 
-![TRUE-d6 Example 1](assets/examples/example1.png)
-![TRUE-d6 Example 2](assets/examples/example2.png)
-![TRUE-d6 Example 3](assets/examples/example3.png)
-![TRUE-d6 Example 4](assets/examples/example4.png)
+<p style="float: left;">
+  <img src="assets/examples/example1.png" alt="Example 1" />
+  <img src="assets/examples/example2.png" alt="Example 2" width="500"/>
+  <img src="assets/examples/example3.png" alt="Example 3" width="500"/>
+  <img src="assets/examples/example5.png" alt="Example 5" width="500"/>
+  <img src="assets/examples/example4.png" alt="Example 4" width="500"/>
+</p>
 
 ## Changelog
 
