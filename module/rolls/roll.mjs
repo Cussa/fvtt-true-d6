@@ -1,4 +1,4 @@
-import { isTrue } from "../helpers/extensions.mjs";
+import { TRUED6 } from "../helpers/config.mjs";
 
 export class Trued6Roll {
   static RollTemplate = "systems/trued6/templates/chat/roll.hbs";
@@ -7,24 +7,17 @@ export class Trued6Roll {
   //RollType = attack, defense, melee, ranged, attribute
   //RollStyle = normal, advantage, disadvantage
 
-  static RollStyles = {
-    Normal: 0,
-    Advantage: 1,
-    Disadvantage: -1
-  };
-
   static getRollStyle(event, data, rollData) {
     let currentRollStyle = {
       hasAdvantage: false,
       hasDisadvantage: false,
-      value: 0
+      value: parseInt(data.rollStyle ?? 0)
     };
-    if (event.altKey ||
-      isTrue(data.forceDisadvantage))
+    console.log(currentRollStyle, data);
+    if (event.altKey)
       currentRollStyle.hasDisadvantage = true;
 
-    if (event.shiftKey ||
-      isTrue(data.forceAdvantage))
+    if (event.shiftKey)
       currentRollStyle.hasAdvantage = true;
 
     if (rollData.forceDisadvantage) {
@@ -57,8 +50,8 @@ export class Trued6Roll {
     this.getRollFlavor(data, result, actorRollData);
 
     if (!result.isSuccess) {
-      if (result.rollStyle == this.RollStyles.Disadvantage)
-        result.rollStyle = this.RollStyles.Normal;
+      if (result.rollStyle == TRUED6.rollStyle.values.Disadvantage)
+        result.rollStyle = TRUED6.rollStyle.values.Normal;
       result.resultValue = null;
       return result;
     }
@@ -150,12 +143,12 @@ export class Trued6Roll {
 
     message.update({ content: newContent[0].outerHTML });
 
-    await this.roll(actor, data, event);
+    await this.roll(actor, data, event, TRUED6.rollStyle.values.Normal);
   }
 
-  static async roll(actor, data, event) {
+  static async roll(actor, data, event, rollStyle) {
     const actorRollData = actor.getRollData();
-    const rollStyle = this.getRollStyle(event, data, actorRollData);
+    rollStyle = rollStyle ?? this.getRollStyle(event, data, actorRollData);
     if (!data.target && data.attribute && data.attribute != "none")
       data.target = actorRollData[data.attribute.toLowerCase()]?.value;
     const rollFormula = data.formula ?? `1d6cs<=${data.target}`;
@@ -219,13 +212,13 @@ export class Trued6Roll {
   static async finalizeRoll(chatData, actor, roll, data, rollStyle, actorRollData) {
     await ChatMessage.create(chatData);
     let finalRoll = roll;
-    if (rollStyle == this.RollStyles.Disadvantage && roll.total > 0) {
+    if (rollStyle == TRUED6.rollStyle.values.Disadvantage && roll.total > 0) {
       const attackRoll = await this.createRoll(roll.formula);
-      finalRoll = await this.sendRollToChat(attackRoll, actor, data, this.RollStyles.Normal, actorRollData);
+      finalRoll = await this.sendRollToChat(attackRoll, actor, data, TRUED6.rollStyle.values.Normal, actorRollData);
     }
     if (data.itemId &&
-      ((rollStyle == this.RollStyles.Disadvantage && roll.total == 0) ||
-      rollStyle == this.RollStyles.Normal)) {
+      ((rollStyle == TRUED6.rollStyle.values.Disadvantage && roll.total == 0) ||
+        rollStyle == TRUED6.rollStyle.values.Normal)) {
       let item = actor.items.get(data.itemId);
       await item.updateUsage(roll);
     }

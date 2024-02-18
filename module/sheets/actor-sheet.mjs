@@ -294,7 +294,7 @@ export class Trued6ActorSheet extends ActorSheet {
     const dataset = element.dataset;
     const actor = this.actor;
 
-    return Trued6Roll.roll(actor, dataset, event);
+    return Trued6Roll.roll(actor, dataset, event, null);
   }
 
   async _onShortRest(event) {
@@ -346,7 +346,7 @@ export class Trued6ActorSheet extends ActorSheet {
       label: game.i18n.localize("TRUED6.LongRest"),
       rollType: "rest"
     };
-    const roll = await Trued6Roll.roll(this.actor, data, {});
+    const roll = await Trued6Roll.roll(this.actor, data, {}, null);
 
     var newHealth = Math.min(this.actor.system.health.value + roll.total, this.actor.system.health.max);
     await this.actor.update({ "system.health.value": newHealth });

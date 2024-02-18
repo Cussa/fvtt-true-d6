@@ -1,3 +1,5 @@
+import { TRUED6 } from "../helpers/config.mjs";
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -64,6 +66,9 @@ export class Trued6Item extends Item {
 
     labels.push(game.i18n.localize(`TRUED6.Skill.UsageType.${this.system.usageType}`));
 
+    if (this.system.rollStyle != TRUED6.rollStyle.values.Normal)
+      labels.push(game.i18n.localize(TRUED6.rollStyle.keys[this.system.rollStyle]))
+
     return labels.join(this.img ? "<br>" : " - ");
   }
 
@@ -75,8 +80,9 @@ export class Trued6Item extends Item {
       labels.push(`${game.i18n.localize(`TRUED6.Equipment.DmgBonus`)}: ${this.system.damageBonus}`)
     if (this.system.defenseValue)
       labels.push(`${game.i18n.localize(`TRUED6.Equipment.Defense`)}: ${this.system.defenseValue}`)
-    if (this.system.forceDisadvantage)
-      labels.push(`${game.i18n.localize(`TRUED6.Equipment.ForceDisadvantage`)}`)
+    if (this.system.rollStyle != TRUED6.rollStyle.values.Normal)
+      labels.push(game.i18n.localize(TRUED6.rollStyle.keys[this.system.rollStyle]))
+
     return labels.join(this.img ? "<br>" : " - ");
   }
 

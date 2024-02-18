@@ -67,9 +67,15 @@
               </div>
             </div>
             <div class="flexrow align-center">
-              <label class="label big1-5 bottom-left">{{localize "TRUED6.Equipment.ForceDisadvantage"}}</label>
+              <label class="label big1-5 bottom-left">{{localize "TRUED6.DiceRoll.RollStyle.Label"}}</label>
               <div>
-                <input type="checkbox" name="system.forceDisadvantage" {{checked item.system.forceDisadvantage}}>
+                <select name="system.rollStyle">
+                  {{#select item.system.rollStyle}}
+                  <option value="0">{{localize "TRUED6.DiceRoll.RollStyle.Normal"}}</option>
+                  <option value="1">{{localize "TRUED6.DiceRoll.RollStyle.Advantage"}}</option>
+                  <option value="-1">{{localize "TRUED6.DiceRoll.RollStyle.Disadvantage"}}</option>
+                  {{/select}}
+                </select>
               </div>
             </div>
           </div>

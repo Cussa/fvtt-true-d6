@@ -85,7 +85,13 @@
       "All": "ALL",
       "Reroll": "Reroll",
       "DiscardedByAdvantage": "Discarded by Advantage",
-      "DiscardedByDisadvantage": "Discarded by Disadvantage"
+      "DiscardedByDisadvantage": "Discarded by Disadvantage",
+      "RollStyle": {
+        "Label": "Roll Style",
+        "Normal": "Normal",
+        "Advantage": "Advantage",
+        "Disadvantage": "Disadvantage"
+      }
     },
     "Player": {
       "Class": "Classes/levels",
@@ -102,7 +108,6 @@
       "AttackType": "Attack Type",
       "DmgBonus": "Dmg Bonus",
       "Defense": "Defense",
-      "ForceDisadvantage": "Force Disadv.",
       "": "",
       "Equipped": "Equipped Equipments",
       "Unequipped": "Unequipped Equipments"

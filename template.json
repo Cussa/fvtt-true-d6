@@ -1,6 +1,9 @@
 {
   "Actor": {
-    "types": ["player", "npc"],
+    "types": [
+      "player",
+      "npc"
+    ],
     "templates": {
       "base": {
         "health": {
@@ -11,7 +14,9 @@
       }
     },
     "player": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "attributes": {
         "str": {
           "value": 1
@@ -38,7 +43,9 @@
       "coins": 100
     },
     "npc": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "melee": {
         "number": 1,
         "value": 3,
@@ -53,42 +60,55 @@
     }
   },
   "Item": {
-    "types": ["item", "feature", "spell", "extraAttack", "equipment", "skill"],
+    "types": [
+      "item",
+      "feature",
+      "extraAttack",
+      "equipment",
+      "skill"
+    ],
     "templates": {
       "base": {
         "description": ""
       }
     },
     "item": {
-      "templates": ["base"]
+      "templates": [
+        "base"
+      ]
     },
     "feature": {
-      "templates": ["base"]
+      "templates": [
+        "base"
+      ]
     },
     "extraAttack": {
-      "templates": ["base"]
-    },
-    "spell": {
-      "templates": ["base"],
-      "spellLevel": 1
+      "templates": [
+        "base"
+      ]
     },
     "equipment": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "type": "Weapon",
       "attackType": "",
       "damageBonus": 0,
-      "forceDisadvantage": false,
+      "rollStyle": 0,
       "defenseValue": 0,
       "equipped": true
     },
     "skill": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "usageType": "passive",
       "whenRestUsed": false,
       "whenFailedUsed": false,
       "isSpell": false,
       "isAttack": false,
-      "attribute": ""
+      "attribute": "",
+      "rollStyle": 0
     }
   }
 }

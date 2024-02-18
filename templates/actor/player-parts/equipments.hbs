@@ -34,7 +34,7 @@
       {{#if (and item.rollable (eq statusId 0))}}
       <a class='rollable' data-roll-type='{{item.rollType}}' data-target="{{item.target}}" data-label="{{item.label}}"
         data-dmg-bonus="{{item.system.damageBonus}}" data-attribute="{{item.attribute}}"
-        data-force-disadvantage="{{item.system.forceDisadvantage}}">
+        data-roll-style="{{item.system.rollStyle}}">
         <i class='fas fa-dice'></i>
       </a>
       {{/if}}

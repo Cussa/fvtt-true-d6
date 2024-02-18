@@ -14,3 +14,16 @@ TRUED6.attributes = {
   wis: 'TRUED6.Attributes.Wis',
   cha: 'TRUED6.Attributes.Cha',
 };
+
+TRUED6.rollStyle = {
+  keys: {
+    "-1": 'TRUED6.DiceRoll.RollStyle.Disadvantage',
+    "0": 'TRUED6.DiceRoll.RollStyle.Normal',
+    "1": 'TRUED6.DiceRoll.RollStyle.Advantage',
+  },
+  values: {
+    Normal: 0,
+    Advantage: 1,
+    Disadvantage: -1
+  }
+}
