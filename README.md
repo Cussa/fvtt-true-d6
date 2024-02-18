@@ -22,10 +22,10 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 ![TRUE-d6 Example 3](assets/examples/example3.png)
 ![TRUE-d6 Example 4](assets/examples/example4.png)
 
-
 ## Changelog
 
 ### 0.0.5 (In development)
+- ✨ Use right click to exhaust a rollable skill
 - 🐛 Send attribute key to roll
 - 🔨 show Critical success even if not an attack
 - ✨ Custom Active Effects system 😃

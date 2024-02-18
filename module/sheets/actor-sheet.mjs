@@ -223,6 +223,7 @@ export class Trued6ActorSheet extends ActorSheet {
     html.on('click', '.refreshUse', this._onItemRefresh.bind(this));
     html.on('click', '.send-to-chat', this._onItemSendToChat.bind(this));
     html.on('click', '.equip', this._onItemEquip.bind(this));
+    html.on('contextmenu', '.skills .rollable', this._onItemUse.bind(this));
 
     // Delete Inventory Item
     html.on('click', '.item-delete', (ev) => {
