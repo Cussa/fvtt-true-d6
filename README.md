@@ -30,6 +30,8 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
   </summary>
 
 ### 0.0.5 (In development)
+- 🔨 show Critical success even if not an attack
+- ✨ Custom Active Effects system 😃
 - 🐛 Handle situation where "double adv/disadv"
 - ✨ use colors to define adv/disadv in rollables
 - ✨ Allow Skill and Equipment to define RollStyle
