@@ -33,6 +33,8 @@ export class Trued6Roll {
     currentRollStyle.value += currentRollStyle.hasAdvantage ? 1 : 0;
     currentRollStyle.value += currentRollStyle.hasDisadvantage ? -1 : 0;
 
+    currentRollStyle.value = Math.min(1, Math.max(currentRollStyle.value, -1));
+
     return currentRollStyle.value;
   }
 
@@ -147,6 +149,7 @@ export class Trued6Roll {
   }
 
   static async roll(actor, data, event, rollStyle) {
+    console.log(rollStyle);
     const actorRollData = actor.getRollData();
     rollStyle = rollStyle ?? this.getRollStyle(event, data, actorRollData);
     if (!data.target && data.attribute && data.attribute != "none")
