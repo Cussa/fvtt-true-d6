@@ -22,12 +22,8 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 ![TRUE-d6 Example 3](assets/examples/example3.png)
 ![TRUE-d6 Example 4](assets/examples/example4.png)
 
-<details>
-  <summary>
-    <h2>
-      Changelog
-    </h2>
-  </summary>
+
+## Changelog
 
 ### 0.0.5 (In development)
 - 🔨 show Critical success even if not an attack
@@ -41,6 +37,13 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 
 ### 0.0.4
 - 🐛 Disable debug when publishing the release
+
+<details>
+  <summary>
+    <h3>
+      Older versions
+    </h3>
+  </summary>
 
 ### 0.0.3
 - 🐛 Only use item if there is an item
