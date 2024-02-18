@@ -21,3 +21,33 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 ![TRUE-d6 Example 2](assets/examples/example2.png)
 ![TRUE-d6 Example 3](assets/examples/example3.png)
 ![TRUE-d6 Example 4](assets/examples/example4.png)
+
+<details>
+  <summary>
+    <h2>
+      Changelog
+    </h2>
+  </summary>
+
+### 0.0.5 (In development)
+- 🐛 Handle situation where "double adv/disadv"
+- ✨ use colors to define adv/disadv in rollables
+- ✨ Allow Skill and Equipment to define RollStyle
+- 🐛 only tries to open first actor if there is an actor
+- 🚸 Show which kind of item player is changing
+- 🧹 remove "spell" item
+
+### 0.0.4
+- 🐛 Disable debug when publishing the release
+
+### 0.0.3
+- 🐛 Only use item if there is an item
+- 📝 udpate README with examples
+
+### 0.0.2
+- 💚 send assets into the zip folder
+
+### 0.0.1
+- 🎉 Project initialized
+
+</details>
