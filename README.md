@@ -15,6 +15,13 @@ Implemented by: [CussaMitre](https://github.com/Cussa)
 
 To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](https://preview.drivethrurpg.com/en/product/454719/TRUEd6)
 
+## Key Operations!
+
+- Rollable items: anything with the "blue" color when the mouse is over
+- Roll with advantage: hold `SHIFT` (the item will become green) and click on it
+- Roll with disadvantage: hold `ALT/OPTION` (the item will become red) and click on it
+- Exhaust a rollable skill: right click on the dice
+
 ## Examples
 
 ![TRUE-d6 Example 1](assets/examples/example1.png)
