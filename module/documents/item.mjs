@@ -58,7 +58,7 @@ export class Trued6Item extends Item {
 
   _getLabelSkill(labels) {
     if (this.system.attribute)
-      labels.push(game.i18n.localize(`TRUED6.Attributes.${this.system.attribute}.long`));
+      labels.push(game.i18n.localize(`${CONFIG.TRUED6.attributes[this.system.attribute]}.long`));
     if (this.system.isSpell)
       labels.push(game.i18n.localize("TRUED6.Skill.Spell"));
     if (this.system.isAttack)
@@ -75,7 +75,7 @@ export class Trued6Item extends Item {
   _getLabelEquipment(labels) {
     labels.push(game.i18n.localize(`TRUED6.Equipment.${this.system.type}`));
     if (this.system.attackType)
-      labels.push(game.i18n.localize(`TRUED6.Attributes.${this.system.attackType}.long`));
+    labels.push(game.i18n.localize(`${CONFIG.TRUED6.attributes[this.system.attribute]}.long`));
     if (this.system.damageBonus)
       labels.push(`${game.i18n.localize(`TRUED6.Equipment.DmgBonus`)}: ${this.system.damageBonus}`)
     if (this.system.defenseValue)
