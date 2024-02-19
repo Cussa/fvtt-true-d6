@@ -31,7 +31,7 @@ export class Trued6Item extends Item {
       return;
     }
 
-    if (this.system.usageType == "fail" && roll?.total == 0) {
+    if (this.system.usageType == "fail" && (roll?.total ?? 0) == 0) {
       await this.update({ "system.whenFailedUsed": true });
       return;
     }
