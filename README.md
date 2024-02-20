@@ -42,6 +42,7 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 ## Changelog
 
 ### 0.0.5 (In development)
+- 🐛 Roll a 1 is not a critical success
 - ✨ Use right click to exhaust a rollable skill
 - 🐛 Send attribute key to roll
 - 🔨 show Critical success even if not an attack

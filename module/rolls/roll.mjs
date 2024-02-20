@@ -61,7 +61,7 @@ export class Trued6Roll {
     if (actor.type == "npc")
       return result;
 
-    if (result.resultValue == data.target) {
+    if (result.resultValue == data.target && data.target > 1) {
       if (result.isAttack)
         result.resultValue++;
 
