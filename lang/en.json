@@ -91,7 +91,8 @@
         "Normal": "Normal",
         "Advantage": "Advantage",
         "Disadvantage": "Disadvantage"
-      }
+      },
+      "RollFormula": "Roll Formula"
     },
     "Player": {
       "Class": "Classes/levels",

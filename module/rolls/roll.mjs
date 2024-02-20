@@ -44,7 +44,7 @@ export class Trued6Roll {
       isSuccess: roll.total > 0,
       cssClass: roll.total > 0 ? "success" : "failure",
       resultKey: "TRUED6.DiceRoll.Damage",
-      resultValue: roll.terms[0].results[0].result,
+      resultValue: roll.countSuccess ? roll.terms[0].results[0].result : roll.total,
       rollStyle: rollStyle,
       isAttack: true
     };
@@ -150,20 +150,21 @@ export class Trued6Roll {
   }
 
   static async roll(actor, data, event, rollStyle) {
-    console.log(rollStyle);
     const actorRollData = actor.getRollData();
     rollStyle = rollStyle ?? this.getRollStyle(event, data, actorRollData);
     if (!data.target && data.attribute && data.attribute != "none")
       data.target = actorRollData[data.attribute.toLowerCase()]?.value;
-    const rollFormula = data.formula ?? `1d6cs<=${data.target}`;
+    const rollFormula = data.formula ? data.formula : `1d6cs<=${data.target}`;
 
     let attackRoll = await this.createRoll(rollFormula, actorRollData);
     return await this.sendRollToChat(attackRoll, actor, data, rollStyle, actorRollData);
   }
 
-  static async createRoll(rollFormula) {
-    let attackRoll = new Roll(rollFormula);
+  static async createRoll(rollFormula, actorRollData) {
+    console.log(rollFormula);
+    let attackRoll = new Roll(rollFormula, actorRollData);
     await attackRoll.evaluate();
+    attackRoll.countSuccess = attackRoll._formula.indexOf("cs") > -1;
     return attackRoll;
   }
 
@@ -194,6 +195,7 @@ export class Trued6Roll {
       damageKey: isPrivate ? "?" : rollResult.resultKey,
       damage: isPrivate ? null : rollResult.resultValue,
       rollStyle: isPrivate ? null : rollResult.rollStyle,
+      roll: roll,
       data: data,
       actorId: actor.id
     };

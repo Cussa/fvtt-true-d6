@@ -108,7 +108,8 @@
       "isSpell": false,
       "isAttack": false,
       "attribute": "",
-      "rollStyle": 0
+      "rollStyle": 0,
+      "formula": ""
     }
   }
 }
