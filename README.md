@@ -5,6 +5,13 @@
 
 An **OFFICIAL** Foundry implementation for the TRUE-d6 System!
 
+> [!WARNING]
+> ## 🚧 System Under Development
+> 
+> **Important Notice:** This system is currently in active development. Consider the current releases as "beta", which implies that breaking changes may occur. While I strive to minimize disruptions, they are sometimes unavoidable. For instance, recent issues, both open and resolved, have prompted significant structural adjustments planned for Version 0.0.5.
+> 
+> Please use the system with this in mind, understanding that changes are ongoing, particularly as I develop the Kogarashi premium module, the system's first real-world application. Your patience and feedback are greatly appreciated as we work towards refining and stabilizing the system.
+
 ![TRUE-d6](assets/banner.png)
 
 Tabletop Roleplaying Universal Engine d6, or TRUE-d6, is a flexible and minimal TTRPG. Its core system is designed for fantasy settings, but it can be adapted to anything.
