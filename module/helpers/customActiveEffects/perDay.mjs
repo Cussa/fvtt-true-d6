@@ -10,14 +10,10 @@ const regexes = {
   withClassRegex: {
     pattern: /_(\d)\/day: any (\w*) skill$/g,
     func: _handleAnyClass
-  },
-  // withSkillRegex: {
-  //   pattern: /_(\d)\/day: (.*) \((\w*)\)$/g,
-  //   func: _handleSkill
-  // }
+  }
 };
 
-export function perDay(actor, change) {
+export function perday(actor, change) {
   const currentItem = change.effect.parent;
   if (currentItem.system.whenRestUsed)
     return;

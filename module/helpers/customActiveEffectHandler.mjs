@@ -1,4 +1,4 @@
-import { perDay } from "./customActiveEffects/perDay.mjs";
+import { perday } from "./customActiveEffects/perDay.mjs";
 
 export class Trued6Cae {
   registerHook() {
@@ -14,9 +14,5 @@ export class Trued6Cae {
     fn(actor, change);
   }
 
-  effect1(actor, _) {
-    let maxHealth = Math.max(actor.system.health.max, 10);
-    foundry.utils.setProperty(actor, "system.health.max", maxHealth);
-  }
-  perDay(actor, change) { perDay(actor, change); }
+  perday(actor, change) { perday(actor, change); }
 }
