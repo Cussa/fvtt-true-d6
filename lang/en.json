@@ -122,7 +122,7 @@
         "fail": "Until Fail"
       },
       "Attribute": "Attribute",
-      "Used": "Used",
+      "Used": "Exhausted",
       "Spell": "Spell",
       "RollResult": "Roll Result"
     }
