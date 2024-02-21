@@ -42,17 +42,24 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 ## Changelog
 
 ### 0.0.5 (In development)
-- 🐛 Roll a 1 is not a critical success
-- ✨ Use right click to exhaust a rollable skill
-- 🐛 Send attribute key to roll
-- 🔨 show Critical success even if not an attack
-- ✨ Custom Active Effects system 😃
-- 🐛 Handle situation where "double adv/disadv"
-- ✨ use colors to define adv/disadv in rollables
-- ✨ Allow Skill and Equipment to define RollStyle
-- 🐛 only tries to open first actor if there is an actor
-- 🚸 Show which kind of item player is changing
 - 🧹 remove "spell" item
+- 🚸 Show which kind of item player is changing
+- 🐛 only tries to open first actor if there is an actor
+- ✨ Allow Skill and Equipment to define RollStyle
+- ✨ use colors to define adv/disadv in rollables
+- 🐛 Handle situation where "double adv/disadv"
+- ✨ Custom Active Effects system 😃
+- 🔨 show Critical success even if not an attack
+- 🐛 Send attribute key to roll
+- ✨ Use right click to exhaust a rollable skill
+- 🐛 Roll a 1 is not a critical success
+- ✨ Allow skill to have a custom formula
+- ✨ Allow monsters to have skills (Fix #1)
+- ✨ PerDay ActiveEffect handler
+- ✨ Limit the min/max numbers for attributes
+- 🌐 Change skill "Used" to "Exhausted"
+- ✨ Mark skill as rollable if it has a formula too
+- ✨ Move NPC skills to main page
 
 ### 0.0.4
 - 🐛 Disable debug when publishing the release
