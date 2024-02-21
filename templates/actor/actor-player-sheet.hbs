@@ -105,7 +105,11 @@
 
     {{!-- Owned Skills Tab --}}
     <div class="tab skills" data-group="primary" data-tab="skills">
-      {{> "systems/trued6/templates/actor/player-parts/skills.hbs"}}
+      <div class="grid align-center big2">
+        <a class="short-rest-button">Short Rest</a>
+        <a class="long-rest-button">Long Rest</a>
+      </div>
+      {{> "systems/trued6/templates/actor/parts/skills.hbs"}}
     </div>
 
     {{!-- Owned Items Tab --}}
