@@ -170,8 +170,8 @@ export class Trued6ActorSheet extends ActorSheet {
       }
       else if (i.type == "skill") {
         i.isUsed = i.system.whenRestUsed || i.system.whenFailedUsed;
-        i.rollable = i.system.attribute && !i.isUsed;
-        i.usable = !i.system.attribute && !i.isUsed && i.system.usageType != "passive";
+        i.rollable = (i.system.attribute || i.system.formula) && !i.isUsed;
+        i.usable = !i.system.attribute && !i.system.formula && !i.isUsed && i.system.usageType != "passive";
 
         i.isUsedInfo = i.system.usageType != "passive" ? game.i18n.localize(i.isUsed ? "Yes" : "No") : null;
         i.rollType = i.system.isSpell ? "spell" : "skill";
@@ -335,7 +335,7 @@ export class Trued6ActorSheet extends ActorSheet {
 
     if (dialogOutput)
       await this.actor.items.get(dialogOutput).refreshUsage();
-    
+
     await this._notifyRest(false);
   }
 
