@@ -111,7 +111,6 @@ export class Trued6ActorSheet extends ActorSheet {
     // Initialize containers.
     const gear = [];
     const features = [];
-    const extraAttacks = [];
     const equipments = {
       true: {
         label: game.i18n.localize("TRUED6.Equipment.Equipped"),
@@ -134,9 +133,6 @@ export class Trued6ActorSheet extends ActorSheet {
       // Append to features.
       else if (i.type === 'feature') {
         features.push(i);
-      }
-      else if (i.type === 'extraAttack') {
-        extraAttacks.push(i);
       }
       else if (i.type === 'equipment') {
         i.equipClass = i.system.equipped ? "box-open" : "box";
@@ -189,7 +185,6 @@ export class Trued6ActorSheet extends ActorSheet {
     context.equipments = [equipments.true, equipments.false];
     context.gear = gear.sort((a, b) => a.name.localeCompare(b.name));
     context.features = features.sort((a, b) => a.name.localeCompare(b.name));
-    context.extraAttacks = extraAttacks.sort((a, b) => a.name.localeCompare(b.name));
     context.skills = skills.sort((a, b) => a.name.localeCompare(b.name));
 
     if (this.actor.type == "npc") {

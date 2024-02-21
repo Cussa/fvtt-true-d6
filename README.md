@@ -60,6 +60,7 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 - 🌐 Change skill "Used" to "Exhausted"
 - ✨ Mark skill as rollable if it has a formula too
 - ✨ Move NPC skills to main page
+- 🧹 Remove "extra-attack" item (handled by "Skills" now)
 
 ### 0.0.4
 - 🐛 Disable debug when publishing the release

@@ -63,7 +63,6 @@
     "types": [
       "item",
       "feature",
-      "extraAttack",
       "equipment",
       "skill"
     ],
@@ -78,11 +77,6 @@
       ]
     },
     "feature": {
-      "templates": [
-        "base"
-      ]
-    },
-    "extraAttack": {
       "templates": [
         "base"
       ]

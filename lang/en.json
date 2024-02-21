@@ -1,7 +1,6 @@
 {
   "TRUED6": {
     "Main": "Main",
-    "ExtraAttacks": "Extra Attacks",
     "Features": "Features",
     "none": "None",
     "Characteristics": "Characteristics",
@@ -135,7 +134,6 @@
     "Item": {
       "item": "Item",
       "feature": "Feature",
-      "extraAttack": "Extra Attack",
       "equipment": "Equipment",
       "skill": "Skill"
     }
