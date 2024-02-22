@@ -62,7 +62,6 @@
   "Item": {
     "types": [
       "item",
-      "feature",
       "equipment",
       "skill"
     ],
@@ -72,11 +71,6 @@
       }
     },
     "item": {
-      "templates": [
-        "base"
-      ]
-    },
-    "feature": {
       "templates": [
         "base"
       ]

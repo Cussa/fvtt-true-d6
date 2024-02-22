@@ -1,7 +1,6 @@
 {
   "TRUED6": {
     "Main": "Main",
-    "Features": "Features",
     "none": "None",
     "Characteristics": "Characteristics",
     "Rest": "Rest",
@@ -123,7 +122,9 @@
       "Attribute": "Attribute",
       "Used": "Exhausted",
       "Spell": "Spell",
-      "RollResult": "Roll Result"
+      "RollResult": "Roll Result",
+      "Feature": "Feature",
+      "Special": "Special"
     }
   },
   "TYPES": {
@@ -133,7 +134,6 @@
     },
     "Item": {
       "item": "Item",
-      "feature": "Feature",
       "equipment": "Equipment",
       "skill": "Skill"
     }
