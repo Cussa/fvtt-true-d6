@@ -4,10 +4,22 @@
     <div class="header-fields">
       <div class="border grid-12col">
         <div class="input grid-span-12 separator-line big1">
-          <label>{{localize "TYPES.Item.item"}}</label>
+          <label>{{localize "TYPES.Item.inventoryItem"}}</label>
         </div>
         <div class="input grid-span-12 separator-line big3">
           <input name="name" type="text" value="{{item.name}}" placeholder="Name" />
+        </div>
+        <div class="label grid-span-4">
+          <span>{{localize "TRUED6.Price"}}</span>
+        </div>
+        <div class="input grid-span-8">
+          <input type="text" name="system.price" value="{{system.price}}" data-dtype="Number" />
+        </div>
+        <div class="label grid-span-4 bottom-left">
+          <span>Starting Equipment</span>
+        </div>
+        <div class="input grid-span-8">
+          <input type="checkbox" name="system.startingEquipment" {{checked item.system.startingEquipment}}>
         </div>
       </div>
     </div>
@@ -18,7 +30,7 @@
 
     {{!-- Description Tab --}}
     <div class="tab active" data-group="primary" data-tab="description">
-      {{editor system.description target="system.description" rollData=rollData button=true owner=owner
+      {{editor description target="system.description" rollData=rollData button=true owner=owner
       editable=editable}}
     </div>
   </section>

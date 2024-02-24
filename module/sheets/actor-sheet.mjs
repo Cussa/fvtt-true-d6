@@ -109,7 +109,7 @@ export class Trued6ActorSheet extends ActorSheet {
    */
   _prepareItems(context) {
     // Initialize containers.
-    const gear = [];
+    const inventoryItems = [];
     const equipments = {
       true: {
         label: game.i18n.localize("TRUED6.Equipment.Equipped"),
@@ -126,8 +126,8 @@ export class Trued6ActorSheet extends ActorSheet {
     for (let i of context.items) {
       i.img = i.img || Item.DEFAULT_ICON;
       // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i);
+      if (i.type === 'inventoryItem') {
+        inventoryItems.push(i);
       }
       else if (i.type === 'equipment') {
         i.equipClass = i.system.equipped ? "box-open" : "box";
@@ -178,7 +178,7 @@ export class Trued6ActorSheet extends ActorSheet {
       .sort((a, b) => a.name.localeCompare(b.name))
       .sort((a, b) => a.system.type.localeCompare(b.system.type));
     context.equipments = [equipments.true, equipments.false];
-    context.gear = gear.sort((a, b) => a.name.localeCompare(b.name));
+    context.inventoryItems = inventoryItems.sort((a, b) => a.name.localeCompare(b.name));
     context.skills = skills.sort((a, b) => a.name.localeCompare(b.name));
 
     if (this.actor.type == "npc") {

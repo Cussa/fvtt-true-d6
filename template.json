@@ -61,7 +61,7 @@
   },
   "Item": {
     "types": [
-      "item",
+      "inventoryItem",
       "equipment",
       "skill"
     ],
@@ -70,10 +70,11 @@
         "description": ""
       }
     },
-    "item": {
+    "inventoryItem": {
       "templates": [
         "base"
-      ]
+      ],
+      "price": 0
     },
     "equipment": {
       "templates": [
