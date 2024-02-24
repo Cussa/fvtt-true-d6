@@ -38,7 +38,7 @@ export class Trued6ItemSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  async getData() {
     // Retrieve base data structure.
     const context = super.getData();
 
@@ -54,6 +54,8 @@ export class Trued6ItemSheet extends ItemSheet {
 
     // Prepare active effects for easier access
     context.effects = prepareActiveEffectCategories(this.item.effects);
+
+    context.description = await TextEditor.enrichHTML(this.item.system.description);
 
     return context;
   }
