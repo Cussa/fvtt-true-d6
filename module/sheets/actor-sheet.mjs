@@ -124,7 +124,7 @@ export class Trued6ActorSheet extends ActorSheet {
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
-      i.img = i.img || DEFAULT_TOKEN;
+      i.img = i.img || Item.DEFAULT_ICON;
       // Append to gear.
       if (i.type === 'item') {
         gear.push(i);
