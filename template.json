@@ -84,7 +84,8 @@
       "damageBonus": 0,
       "rollStyle": 0,
       "defenseValue": 0,
-      "equipped": true
+      "equipped": true,
+      "price": 0
     },
     "skill": {
       "templates": [

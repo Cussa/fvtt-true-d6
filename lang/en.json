@@ -7,6 +7,7 @@
     "LongRest": "Long Rest",
     "ShortRest": "Short Rest",
     "RecoverSkill": "Recover Skill",
+    "Price": "Price",
     "Attributes": {
       "Str": {
         "long": "Strength",
@@ -133,7 +134,7 @@
       "npc": "NPC"
     },
     "Item": {
-      "item": "Item",
+      "inventoryItem": "Inventory Item",
       "equipment": "Equipment",
       "skill": "Skill"
     }
