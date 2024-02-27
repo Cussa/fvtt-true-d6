@@ -10,6 +10,7 @@ import { TRUED6 } from './helpers/config.mjs';
 import { Trued6Roll } from './rolls/roll.mjs';
 import { RollStyleCssHandler } from './helpers/rollStyleCssHandler.mjs';
 import { Trued6Cae } from './helpers/customActiveEffectHandler.mjs';
+import { registerSystemSettings } from './helpers/settings.mjs';
 
 globalThis.trued6 = {
   Trued6Cae: Trued6Cae
@@ -27,6 +28,7 @@ Hooks.once('init', function () {
     Trued6Item,
     rollItemMacro,
   };
+  // CONFIG.debug.hooks = true;
 
   // Add custom constants for configuration.
   CONFIG.TRUED6 = TRUED6;
@@ -62,6 +64,8 @@ Hooks.once('init', function () {
     makeDefault: true,
     label: 'TRUED6.SheetLabels.Item',
   });
+
+  registerSystemSettings();
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
