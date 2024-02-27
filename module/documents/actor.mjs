@@ -130,4 +130,17 @@ export class Trued6Actor extends Actor {
 
     // Process additional NPC data here.
   }
+
+  async _preCreate(data, options, user) {
+    await super._preCreate(data, options, user);
+    if (data.type == "npc")
+      return;
+
+    const startingEquipmentIds = await game.settings.get("trued6", "startingEquipment");
+    if (startingEquipmentIds.length == 0)
+      return;
+
+    let items = await Promise.all(startingEquipmentIds.map(async (i) => (await game.items.get(i)).toObject()));
+    this.updateSource({ items: items });
+  }
 }
