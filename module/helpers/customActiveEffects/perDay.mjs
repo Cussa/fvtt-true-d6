@@ -1,14 +1,14 @@
 const regexes = {
   withUsageTypeRegex: {
-    pattern: /_(\d)\/day: any (.*) \((\w*)\) skill$/g,
+    pattern: /\(SPECIAL\) (\d)\/day: any (.*) \((\w*)\) skill$/g,
     func: _handleUsageType
   },
   withSpellRegex: {
-    pattern: /_(\d)\/day: any (.*) \[SPELL\]$/g,
+    pattern: /\(SPECIAL\) (\d)\/day: any (.*) \[SPELL\]$/g,
     func: _handleSpell
   },
   withClassRegex: {
-    pattern: /_(\d)\/day: any (\w*) skill$/g,
+    pattern: /\(SPECIAL\) (\d)\/day: any (\w*) skill$/g,
     func: _handleAnyClass
   }
 };
