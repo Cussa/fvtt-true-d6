@@ -126,6 +126,14 @@
       "RollResult": "Roll Result",
       "Feature": "Feature",
       "Special": "Special"
+    },
+    "StatusEffects": {
+      "Blocked": "Blocked",
+      "Cover": "Cover",
+      "Flanked": "Flanked",
+      "Petrified": "Petrified",
+      "Sickened": "Sickened",
+      "Surprised": "Surprised"
     }
   },
   "TYPES": {

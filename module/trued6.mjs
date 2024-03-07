@@ -11,6 +11,7 @@ import { Trued6Roll } from './rolls/roll.mjs';
 import { RollStyleCssHandler } from './helpers/rollStyleCssHandler.mjs';
 import { Trued6Cae } from './helpers/customActiveEffectHandler.mjs';
 import { registerSystemSettings } from './helpers/settings.mjs';
+import { configureStatusEffects } from './helpers/statusEffects.mjs';
 
 globalThis.trued6 = {
   Trued6Cae: Trued6Cae
@@ -66,6 +67,7 @@ Hooks.once('init', function () {
   });
 
   registerSystemSettings();
+  configureStatusEffects();
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
