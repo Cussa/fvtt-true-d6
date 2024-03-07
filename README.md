@@ -62,6 +62,17 @@ To acquire TRUE-d6: [https://preview.drivethrurpg.com/en/product/454719/TRUEd6](
 - ✨ Move NPC skills to main page
 - 🧹 Remove "extra-attack" item (handled by "Skills" now)
 - 🧹 Remove "features" item (handled by "Skills" now)
+- 🔥 Remove spell sheet template
+- ✨ Change item to `Inventory Item`
+- ✨ Add price to Equipment
+- ✨ Enrich item description
+- ✨ Remove starting equipment from Inventory Item
+- ✨ Insert send to chat for Inventory items
+- 🐛 Adjust the equipment chat description
+- ✨ Starting equipment configuration
+- ✨ Add default items into player inventory
+- 🐛 Fix the `perDay` regex (using `(SPECIAL)`)
+- ✨ Status Effects with the names used in TRUE-d6
 
 ### 0.0.4
 - 🐛 Disable debug when publishing the release
