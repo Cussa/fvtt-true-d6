@@ -151,7 +151,7 @@ export class Trued6Roll {
 
   static async roll(actor, data, event, rollStyle) {
     let modifier = data.modifier ?? 0;
-    if (await game.settings.get("trued6", "useStepBonus") && data.modifier == undefined)
+    if (data.rollType != "rest" && await game.settings.get("trued6", "useStepBonus") && data.modifier == undefined)
       modifier = await Dialog.wait({
         title: "Choose the bonus",
         buttons: {

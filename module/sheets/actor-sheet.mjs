@@ -283,6 +283,7 @@ export class Trued6ActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
     const actor = this.actor;
+    delete dataset.modifier;
 
     return Trued6Roll.roll(actor, dataset, event, null);
   }
