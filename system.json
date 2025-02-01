@@ -25,7 +25,7 @@
   "version": "0.0.1",
   "compatibility": {
     "minimum": 11,
-    "verified": "11.315"
+    "verified": "12"
   },
   "esmodules": ["module/trued6.mjs"],
   "styles": ["css/trued6.css"],
