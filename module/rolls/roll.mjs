@@ -206,10 +206,12 @@ export class Trued6Roll {
     let content = await renderTemplate(this.RollTemplate, templateData);
     chatData.content = content;
     chatData.rolls = [roll];
-    if (game.dice3d) {
-      await game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind)
-    } else {
-      chatData.sound = CONFIG.sounds.dice;
+    if (game.version.startsWith(11)) {
+      if (game.dice3d)
+        await game.dice3d.showForRoll(roll, game.user, true, chatData.whisper, chatData.blind)
+      else {
+        chatData.sound = CONFIG.sounds.dice;
+      }
     }
     finalRoll = await this.finalizeRoll(chatData, actor, roll, data, rollStyle, actorRollData);
     return finalRoll;
