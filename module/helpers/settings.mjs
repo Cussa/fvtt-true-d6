@@ -13,4 +13,12 @@ export const registerSystemSettings = function () {
     type: Array,
     default: []
   });
+  game.settings.register('trued6', 'useStepBonus', {
+    name: "Use Step Bonus",
+    hint: "Shows a dialog with a step bonus from -3 to +3 for the rolls",
+    scope: 'world',
+    type: Boolean,
+    config: true,
+    default: false
+  });
 }

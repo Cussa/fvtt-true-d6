@@ -61,7 +61,7 @@ export class Trued6Roll {
     if (actor.type == "npc")
       return result;
 
-    if (result.resultValue == data.target && data.target > 1) {
+    if (result.resultValue == data.finalTarget && data.finalTarget > 1) {
       if (result.isAttack)
         result.resultValue++;
 
@@ -150,11 +150,53 @@ export class Trued6Roll {
   }
 
   static async roll(actor, data, event, rollStyle) {
+    let modifier = data.modifier ?? 0;
+    if (await game.settings.get("trued6", "useStepBonus") && data.modifier == undefined)
+      modifier = await Dialog.wait({
+        title: "Choose the bonus",
+        buttons: {
+          bm3: {
+            label: "-3",
+            callback: () => -3
+          },
+          bm2: {
+            label: "-2",
+            callback: () => -2
+          },
+          bm1: {
+            label: "-1",
+            callback: () => -1
+          },
+          b0: {
+            label: "0",
+            callback: () => 0
+          },
+          bp1: {
+            label: "+1",
+            callback: () => 1
+          },
+          bp2: {
+            label: "+2",
+            callback: () => 2
+          },
+          bp3: {
+            label: "+3",
+            callback: () => 3
+          },
+        },
+        default: "b0",
+        close: () => 0
+      });
+
+
     const actorRollData = actor.getRollData();
     rollStyle = rollStyle ?? this.getRollStyle(event, data, actorRollData);
     if (!data.target && data.attribute && data.attribute != "none")
       data.target = actorRollData[data.attribute.toLowerCase()]?.value;
-    const rollFormula = data.formula ? data.formula : `1d6cs<=${data.target}`;
+    data.finalTarget = Math.min(Math.max(parseInt(data.target) + parseInt(modifier), 1), 5);
+    data.modifier = modifier;
+    console.log(modifier, data.target, data.finalTarget);
+    const rollFormula = data.formula ? data.formula : `1d6cs<=${data.finalTarget}`;
 
     let attackRoll = await this.createRoll(rollFormula, actorRollData);
     return await this.sendRollToChat(attackRoll, actor, data, rollStyle, actorRollData);
