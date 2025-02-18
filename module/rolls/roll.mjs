@@ -192,7 +192,7 @@ export class Trued6Roll {
     const actorRollData = actor.getRollData();
     rollStyle = rollStyle ?? this.getRollStyle(event, data, actorRollData);
     if (!data.target && data.attribute && data.attribute != "none")
-      data.target = actorRollData[data.attribute.toLowerCase()]?.value;
+      data.target = actor.type == "npc" ? 3 : actorRollData[data.attribute.toLowerCase()]?.value;
     data.finalTarget = Math.min(Math.max(parseInt(data.target) + parseInt(modifier), 1), 5);
     data.modifier = modifier;
     console.log(modifier, data.target, data.finalTarget);
